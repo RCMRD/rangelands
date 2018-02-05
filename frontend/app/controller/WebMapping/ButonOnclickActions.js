@@ -361,6 +361,7 @@ var conservancydata = [
 
 Ext.rangelands.years = [
 
+    ['2018'],
     ['2017'],
     ['2016'],
     ['2015'],
