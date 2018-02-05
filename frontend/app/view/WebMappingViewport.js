@@ -96,11 +96,11 @@ LogoPanel = new Ext.Panel({
 NdviSearchForm = Ext.create('Ext.form.Panel', {
     bodyPadding: 10,
     id: 'ndvi_form_id', 
-    title: 'Vegetation Indicators',
+    title: 'Normalized Difference Vegetation Index (NDVI)',
     //height: 300,
     autoScroll: true,
     collapsible: true,
-    items: {
+    items: [{
 
             xtype:'tabpanel',
             name: 'ndvi_tabs',
@@ -241,7 +241,10 @@ NdviSearchForm = Ext.create('Ext.form.Panel', {
                 }]
             }]
 
-    }
+    },{
+                
+                html: '<br /><br /> The Normalized Difference Vegetation Index (NDVI) measures the greenness of ground cover, and is used as a proxy to indicate the density and health of vegetation. NDVI values range from +1 to -1, with high positive values corresponding to dense and healthy vegetation, while a low and/or negative NDVI value would indicate poor vegetation conditions or sparse vegetative cover.'
+            }]
 });
 
 AnomalyForm = Ext.create('Ext.form.Panel', {
@@ -252,7 +255,7 @@ AnomalyForm = Ext.create('Ext.form.Panel', {
     autoScroll: true,
     collapsible: true,
     collapsed: true,
-    items: {
+    items: [{
 
             xtype:'tabpanel',
             name: 'anomaly_tabs',
@@ -416,7 +419,10 @@ AnomalyForm = Ext.create('Ext.form.Panel', {
                 }]
             }]
 
-    }
+    },{
+                
+                html: '<br /><br />The NDVI anomaly indicates the variation of the current dekad to the long-term average, where a positive value (for example 20 percent) would signify enhanced vegetation conditions compared to the average, while a negative value (for instance -40 percent) would indicate comparatively poor vegetation conditions.'
+            }]
 });
 
 VCIForm = Ext.create('Ext.form.Panel', {
@@ -427,7 +433,7 @@ VCIForm = Ext.create('Ext.form.Panel', {
     autoScroll: true,
     collapsible: true,
     collapsed: true,
-    items: {
+    items: [{
 
             xtype:'tabpanel',
             name: 'vci_tabs',
@@ -515,7 +521,10 @@ VCIForm = Ext.create('Ext.form.Panel', {
                 }]
             }]
 
-    }
+    },{
+                
+                html: '<br /><br />The Vegetation Condition Index (VCI) relates the current dekadal NDVI to its long-term minimum, normalized by the historical range of NDVI values for the same dekad. The VCI was designed to separate the weather-related component of the NDVI from the ecological element.'
+            }]
 });
 
 SingleSearchForm = Ext.create('Ext.form.Panel', {
