@@ -153,7 +153,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                         format: "image/png"
                     }, {
                            buffer: 0,
-                            visibility: false,
+                            visibility: true,
                             displayOutsideMaxExtent: true,
                             displayInLayerSwitcher: true,
                             isBaseLayer: false,
