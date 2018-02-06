@@ -32,8 +32,8 @@ layers_tree_store = Ext.create('Ext.data.TreeStore', {
 layer_legend_tree = Ext.create('GeoExt.tree.Panel', {
 	title: "",
 	autoScroll: true,
-    collapsible: true,
-    height: 300,
+    //collapsible: true,
+    //height: 300,
     //preventHeader: true,
  	viewConfig:
 	{
@@ -531,7 +531,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
     bodyPadding: 10,
     id: 'single_search_id', 
     //title: 'Generate Map',
-    height: 200,
+    height: 150,
     autoScroll: true,
     collapsible: true,
     items: [
@@ -613,9 +613,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
             
             
         ]
-        //renderTo:'example-grid',
-        //width: 200,
-        //height: 50
+
     });
 
     var output_panel = new Ext.Panel({
@@ -631,7 +629,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
         // title: 'Layers',
         collapsible: true,
         split: true,
-        items:[SingleSearchForm, downloads]
+        items:[SingleSearchForm, layer_legend_tree, downloads]
 
     }); 
 
@@ -639,7 +637,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
     GeoExtPanel = new Ext.Panel ({
         region: 'west',
         xtype: 'panel',
-        width: 480,
+        //width: 480,
         minWidth: 300,
         height: 650, 
         autoScroll: true,
@@ -651,7 +649,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
                 comp.doLayout();
             }, this)
         },
-        title: 'Data',
+        //title: 'Data',
         //collapsible: true,
         //split: true,
         layout: {
@@ -665,33 +663,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
 
     }); 
 
-var GeneralTabs = Ext.create('Ext.tab.Panel', {
-    id: "generaltabsID",
-    layout: 'card',
-    region: 'west',
-    width:500,
-    minWidth:300,
-    //height: 600, 
-    //autoScroll: true,
-    animate: true,
-    preventHeader: true,
-     hideCollapseTool: true,
-    collapsible: true,
-    activeTab: 0,
-    split: true,
-    tabPosition: 'top',
-    items: [
-            GeoExtPanel, 
-        {
-            title: 'Maps',
-            items:[
-                layer_legend_tree,
-                //novatree
-            //downloads
-            ]
-        }
-    ]
-});
+
 
  function fix_to_bottom(){
 
@@ -713,8 +685,9 @@ WestPanel = new Ext.Panel({
    // preventHeader: true,
     //  hideCollapseTool: true,
     split: true,
-    //items: [layer_legend_tree, SingleSearchForm, downloads, LogoPanel],
-    items: [GeneralTabs, LogoPanel],
+    items: [
+        GeoExtPanel, LogoPanel
+    ],
     listeners: {
         collapse: function() {
             fix_to_bottom();
@@ -787,37 +760,7 @@ WestPanel = new Ext.Panel({
      }]
  });
 
- var chart_1 = new Ext.Panel({
-        //region: 'west',
-        xtype: 'panel',
-        width: 300,
-        //minWidth: 200,
-        height: 400, 
-        autoScroll: true,
-        active:true,
-       // maxWidth: 500,
-        // title: 'Layers',
-        collapsible: true,
-        split: true,
-        contentEl: 'chart1_div',
-
-    }); 
-
- var chart_2 = new Ext.Panel({
-        //region: 'west',
-        xtype: 'panel',
-        width: 300,
-        //minWidth: 200,
-        height: 400, 
-        autoScroll: true,
-        active:true,
-       // maxWidth: 500,
-        // title: 'Layers',
-        collapsible: true,
-        split: true,
-        contentEl: 'chart2_div',
-
-    }); 
+ 
 
  Ext.onReady(function(){
 
@@ -858,25 +801,7 @@ WestPanel = new Ext.Panel({
 					xtype: 'MapPanel'
 				},
                  WestPanel
-                 /*{
-                    // statistics panel
-                    xtype: 'panel',
-                    region: 'east',
-                    id: 'chart',
-                    //contentEl: 'chart_div',
-                    autoScroll: true,
-                    split: true,
-                    //height: 200,
-                    width: 300,
-                    minWidth: 200,
-                    //minSize: 100,
-                    //maxSize: 200,
-                    collapsible: true,
-                    collapsed: true,
-                    title: 'Statistics',
-                    margins: '0 0 0 0',
-                    items: [chart_1, chart_2]
-                }*/
+    
 			]
         });
         me.callParent(arguments);
