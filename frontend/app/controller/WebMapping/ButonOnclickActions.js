@@ -599,7 +599,10 @@ function generate_Map(ndvi_file, shapefile, fieldvalue)
 			_downgrid.removeAll();      
 
 			var map_link = pdf_download_url;
-			var map_url = "<a href='" + map_link + "' target=_blank>Map Download Link</a>";
+			var link_label = map_link.split('/');
+			var _link_label = link_label[11];
+
+			var map_url = "<a href='" + map_link + "' target=_blank>" + _link_label + "</a>";
 			var mapdata = [
 				{label1: map_url}
 			];
