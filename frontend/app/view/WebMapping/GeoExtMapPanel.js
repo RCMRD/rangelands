@@ -110,28 +110,12 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                     }
                     
                 );
-        /*
-        surface_water = new OpenLayers.Layer.WMS("Surface Water",
-                    "http://192.168.100.186:8080/geoserver/wms",
-                    {
-                        layers: 'servir:ke_surfacewaterC',
-                        transparent: true,
-                        format: "image/png"
-                    }, {
-                           buffer: 0,
-                            visibility: false,
-                            displayOutsideMaxExtent: true,
-                            displayInLayerSwitcher: true,
-                            isBaseLayer: false,
-                            yx : {'EPSG:4326' : true}
-                    }
-                    
-                ); */
+    
 
         invasive_species = new OpenLayers.Layer.WMS("Invasive Species",
                     "http://tools.rcmrd.org/geoserver/wms",
                     {
-                        layers: 'servir:invasive_species',
+                        layers: 'rangelands:invasive_species',
                         transparent: true,
                         format: "image/png"
                     }, {
@@ -195,23 +179,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                     }
                     
                 );
-        /*
-        kenya_lulc = new OpenLayers.Layer.WMS("Land Cover",
-                    "http://192.168.100.186:8080/geoserver/wms",
-                    {
-                        layers: 'servir:Kenya_Lulc_2010',
-                        transparent: true,
-                        format: "image/png"
-                    }, {
-                           buffer: 0,
-                            visibility: false,
-                            displayOutsideMaxExtent: true,
-                            displayInLayerSwitcher: true,
-                            isBaseLayer: false,
-                            yx : {'EPSG:4326' : true}
-                    }
-                    
-                ); */
+  
 
         var maxExtent = new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
         restrictedExtent = maxExtent.clone();
