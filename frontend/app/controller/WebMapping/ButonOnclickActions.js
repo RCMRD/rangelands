@@ -474,11 +474,15 @@ function loadLayer(wms_name){
 			       isBaseLayer: false,
 			       yx : {'EPSG:4326' : true}
 			});
+
+
+	
 	map.addLayer(wms_layer);
 
 	map.setLayerIndex(wms_layer, map.layers.length-9);
 
 	current_wms = wms_name;
+	
 
 }
 
@@ -1147,7 +1151,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 						width:500,
 						height:500,
 						autoScroll:true,
-						title: 'About the System',
+						title: 'About the Tool',
 						autoLoad:{
 							url:'pages/about_us.html'
 						}

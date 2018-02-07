@@ -243,7 +243,7 @@ NdviSearchForm = Ext.create('Ext.form.Panel', {
 
     },{
                 
-                html: '<br /><br /> The Normalized Difference Vegetation Index (NDVI) measures the greenness of ground cover, and is used as a proxy to indicate the density and health of vegetation. NDVI values range from +1 to -1, with high positive values corresponding to dense and healthy vegetation, while a low and/or negative NDVI value would indicate poor vegetation conditions or sparse vegetative cover.'
+                html: '<br /><br /> NDVI is an index of plant greenness with maximum NDVI being a better indicator in drylands due to reduced risk of cloud contamination. NDVI ranges between -1,1 where negative values represent water, snow or gaps; values <0.1 represent barren ground, rocks ; 0.2-0.5 represent sparse vegetation such as grasslands, shrubs, crops while values from 0.6 represent dense vegetation such as forests. NDVI can be used to monitor changes in vegetation over time, grazing impacts related to grazing management and plans, changes in land cover, rangeland condition and the type of vegetation.'
             }]
 });
 
@@ -255,7 +255,7 @@ AnomalyForm = Ext.create('Ext.form.Panel', {
     autoScroll: true,
     collapsible: true,
     collapsed: true,
-    items: [{
+    items: {
 
             xtype:'tabpanel',
             name: 'anomaly_tabs',
@@ -268,7 +268,6 @@ AnomalyForm = Ext.create('Ext.form.Panel', {
             items:[{
                 title: 'STD Monthly',
                 id: 'std_monthly',
-                defaultType: 'textfield',
                 defaults: {
                     anchor: '100%'
                 },
@@ -302,10 +301,12 @@ AnomalyForm = Ext.create('Ext.form.Panel', {
                     typeAhead: true,
                     queryMode: 'local',
                     emptyText: 'Select month...'
+                },{
+                
+                html: '<br /><br />NDVI anomalies basically give a qualitative indication of how "good" or "bad" the current season is when compared with other seasons or with the average situation. Where red represents worsening conditions and green represents improving conditions. NDVI anomalies highlight deviations from normal vegetation development (either positive or negative) and take into account variability between the years.  NDVI anomalies can thus be used as an indirect evidence for food security. Values range from -3 to +3. standardized anomalies represent.'
                 }]
             },{
                 title: 'STD Seasonal',
-                defaultType: 'textfield',
                 id: 'std_seasonal',
                 defaults: {
                     anchor: '100%'
@@ -340,11 +341,13 @@ AnomalyForm = Ext.create('Ext.form.Panel', {
                     typeAhead: true,
                     queryMode: 'local',
                     emptyText: 'Select season...'
+                },{
+                
+                html: '<br /><br />NDVI anomalies basically give a qualitative indication of how "good" or "bad" the current season is when compared with other seasons or with the average situation. Where red represents worsening conditions and green represents improving conditions. NDVI anomalies highlight deviations from normal vegetation development (either positive or negative) and take into account variability between the years.  NDVI anomalies can thus be used as an indirect evidence for food security. Values range from -3 to +3. standardized anomalies represent.'
                 }]
             },{
                 title: 'ABS Monthly',
                 id: 'abs_monthly',
-                defaultType: 'textfield',
                 defaults: {
                     anchor: '100%'
                 },
@@ -378,10 +381,12 @@ AnomalyForm = Ext.create('Ext.form.Panel', {
                     typeAhead: true,
                     queryMode: 'local',
                     emptyText: 'Select month...'
+                },{
+                
+                html: '<br /><br />Absolute anomalies represent differences from long term mean therefore provide a good indication of how the current conditions compare with the average conditions of previous years. On the maps red indicates areas where the current ‘greenness’ is below the long-term average, while green indicates better-than-average conditions. Yellow indicates normal conditions. Values range from -1 to +1.'
                 }]
             },{
                 title: 'ABS Seasonal',
-                defaultType: 'textfield',
                 id: 'abs_seasonal',
                 defaults: {
                     anchor: '100%'
@@ -416,13 +421,13 @@ AnomalyForm = Ext.create('Ext.form.Panel', {
                     typeAhead: true,
                     queryMode: 'local',
                     emptyText: 'Select season...'
+                },{
+                
+                html: '<br /><br />Absolute anomalies represent differences from long term mean therefore provide a good indication of how the current conditions compare with the average conditions of previous years. On the maps red indicates areas where the current ‘greenness’ is below the long-term average, while green indicates better-than-average conditions. Yellow indicates normal conditions. Values range from -1 to +1.'
                 }]
             }]
 
-    },{
-                
-                html: '<br /><br />The NDVI anomaly indicates the variation of the current dekad to the long-term average, where a positive value (for example 20 percent) would signify enhanced vegetation conditions compared to the average, while a negative value (for instance -40 percent) would indicate comparatively poor vegetation conditions.'
-            }]
+    }
 });
 
 VCIForm = Ext.create('Ext.form.Panel', {
@@ -523,7 +528,7 @@ VCIForm = Ext.create('Ext.form.Panel', {
 
     },{
                 
-                html: '<br /><br />The Vegetation Condition Index (VCI) relates the current dekadal NDVI to its long-term minimum, normalized by the historical range of NDVI values for the same dekad. The VCI was designed to separate the weather-related component of the NDVI from the ecological element.'
+                html: '<br /><br />The Vegetation Condition Index (VCI) is an indicator of the current activity of the vegetation relative to the historical range (minimum and maximum NDVI values) calculated for the corresponding time from the long term mean (2000 to present). The VCI thus normalizes the NDVI according to its variability measured over many years and results in a consistent index for various land cover types. . Its values range from 0 to 1. VCI values below 0.3 can be interpreted to indicate drought conditions.'
             }]
 });
 
@@ -531,7 +536,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
     bodyPadding: 10,
     id: 'single_search_id', 
     //title: 'Generate Map',
-    height: 150,
+    height: 250,
     autoScroll: true,
     collapsible: true,
     items: [
@@ -579,6 +584,10 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
                             
                         }
                     }
+                },
+                {
+                    html: '<br />To generate a map from selected indicators, select a county or conservancy boundary then select additional information from Overlays and click on <b>Produce Map</b>. A link to download the generated map will appear under <b>Download NDVI Map</b> which when clicked will download the map in PDF format'
+  
                 }
 
     ],
