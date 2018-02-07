@@ -75,6 +75,25 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
             }
         );
 
+        var default_wms = "modis.dekadal.20180121.tif"
+
+        ndvi_wms = new OpenLayers.Layer.WMS("modis.dekadal.20180121.tif",
+                    "http://apps.rcmrd.org:8080/geoserver/wms",
+                    {
+                        layers: 'rangelands:modis.dekadal.20180121.tif',
+                        transparent: true,
+                        format: "image/png"
+                    }, {
+                           buffer: 0,
+                            visibility: true,
+                            displayOutsideMaxExtent: true,
+                            displayInLayerSwitcher: true,
+                            isBaseLayer: false,
+                            yx : {'EPSG:4326' : true}
+                    }
+                    
+                );
+
         
 
         conservancies_wms = new OpenLayers.Layer.WMS("Conservancies",
@@ -220,7 +239,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
         //When there is internet use this
         map.addLayers([towns, invasive_species, rivers, lakes, conservancies_wms, counties_wms, 
-            esri_topo_map, mapbox_street]);
+            ndvi_wms, esri_topo_map, mapbox_street]);
 
         
 
@@ -228,6 +247,8 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 			new OpenLayers.Projection("EPSG:4326"),
 			map.getProjectionObject()
 			), 6 );
+
+        current_wms = default_wms;
 
 
     Ext.apply(me, 
