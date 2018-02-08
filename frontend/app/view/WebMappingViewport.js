@@ -303,7 +303,7 @@ AnomalyForm = Ext.create('Ext.form.Panel', {
                     emptyText: 'Select month...'
                 },{
                 
-                html: '<br /><br />NDVI anomalies basically give a qualitative indication of how "good" or "bad" the current season is when compared with other seasons or with the average situation. Where red represents worsening conditions and green represents improving conditions. NDVI anomalies highlight deviations from normal vegetation development (either positive or negative) and take into account variability between the years.  NDVI anomalies can thus be used as an indirect evidence for food security. Values range from -3 to +3. standardized anomalies represent.'
+                html: '<br /><br />Standardized NDVI anomalies basically give a qualitative indication of how "good" or "bad" the current season is when compared with other seasons or with the average situation. Where red represents worsening conditions and green represents improving conditions. NDVI anomalies highlight deviations from normal vegetation development (either positive or negative) and take into account variability between the years.  NDVI anomalies can thus be used as an indirect evidence for food security. Values range from -3 to +3.'
                 }]
             },{
                 title: 'STD Seasonal',
@@ -343,7 +343,7 @@ AnomalyForm = Ext.create('Ext.form.Panel', {
                     emptyText: 'Select season...'
                 },{
                 
-                html: '<br /><br />NDVI anomalies basically give a qualitative indication of how "good" or "bad" the current season is when compared with other seasons or with the average situation. Where red represents worsening conditions and green represents improving conditions. NDVI anomalies highlight deviations from normal vegetation development (either positive or negative) and take into account variability between the years.  NDVI anomalies can thus be used as an indirect evidence for food security. Values range from -3 to +3. standardized anomalies represent.'
+                html: '<br /><br />Standardized NDVI anomalies basically give a qualitative indication of how "good" or "bad" the current season is when compared with other seasons or with the average situation. Where red represents worsening conditions and green represents improving conditions. NDVI anomalies highlight deviations from normal vegetation development (either positive or negative) and take into account variability between the years.  NDVI anomalies can thus be used as an indirect evidence for food security. Values range from -3 to +3.'
                 }]
             },{
                 title: 'ABS Monthly',
@@ -383,7 +383,7 @@ AnomalyForm = Ext.create('Ext.form.Panel', {
                     emptyText: 'Select month...'
                 },{
                 
-                html: '<br /><br />Absolute anomalies represent differences from long term mean therefore provide a good indication of how the current conditions compare with the average conditions of previous years. On the maps red indicates areas where the current ‘greenness’ is below the long-term average, while green indicates better-than-average conditions. Yellow indicates normal conditions. Values range from -1 to +1.'
+                html: '<br /><br />Absolute NDVI anomalies represent differences from long term mean therefore provide a good indication of how the current conditions compare with the average conditions of previous years. On the maps red indicates areas where the current ‘greenness’ is below the long-term average, while green indicates better-than-average conditions. Yellow indicates normal conditions. Values range from -1 to +1.'
                 }]
             },{
                 title: 'ABS Seasonal',
@@ -423,7 +423,7 @@ AnomalyForm = Ext.create('Ext.form.Panel', {
                     emptyText: 'Select season...'
                 },{
                 
-                html: '<br /><br />Absolute anomalies represent differences from long term mean therefore provide a good indication of how the current conditions compare with the average conditions of previous years. On the maps red indicates areas where the current ‘greenness’ is below the long-term average, while green indicates better-than-average conditions. Yellow indicates normal conditions. Values range from -1 to +1.'
+                html: '<br /><br />Absolute NDVI anomalies represent differences from long term mean therefore provide a good indication of how the current conditions compare with the average conditions of previous years. On the maps red indicates areas where the current ‘greenness’ is below the long-term average, while green indicates better-than-average conditions. Yellow indicates normal conditions. Values range from -1 to +1.'
                 }]
             }]
 
