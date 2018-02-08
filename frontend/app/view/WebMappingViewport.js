@@ -648,7 +648,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
         xtype: 'panel',
         //width: 480,
         minWidth: 300,
-        height: 650, 
+        height: 700, 
         autoScroll: true,
         active:true,
        // maxWidth: 500,
