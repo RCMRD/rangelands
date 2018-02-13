@@ -558,7 +558,7 @@ function generate_Map(ndvi_file, shapefile, fieldvalue)
 			var normalized_difference_vegetation_index_filename = ndvi_file;
 			//var normalized_difference_vegetation_index_filename = 'ea_20010101.tif';
 
-			var gpTaskUrl = "http://maps.rcmrd.org/arcgis/rest/services/Kenya/Kenya_Rangelands_Map_Generator/GPServer/Kenya_Rangeland_Map_Generator";
+			var gpTaskUrl = "http://maps.rcmrd.org/arcgis/rest/services/wps/KenyaRangelandMapGenerator/GPServer/Kenya_Rangeland_Map_Generator";
 
 			var gp_Parameters = {"county_or_conservancy_name":county_or_conservancy_name, "gis_shapefile_name":gis_shapefile_name,"normalized_difference_vegetation_index_filename":normalized_difference_vegetation_index_filename};
 
@@ -657,7 +657,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
                 		Ext.MessageBox.hide();
                 		//Ext.example.msg('Done', 'NDVI map generated!');
                 		Ext.Msg.alert('Done', 'NDVI map generated.');
-                		}, 1000);
+                		}, 2000);
 					
 
 					//alert(_vector + ': ' + _property + ': ' + _feature + ': ' + ndvi_tif);
