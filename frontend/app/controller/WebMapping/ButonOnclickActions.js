@@ -600,7 +600,7 @@ function generate_Map(ndvi_file, shapefile, fieldvalue)
 
 			// load map download link
 			var _downgrid = Ext.getCmp('downgrid').getStore();
-			_downgrid.removeAll();      
+			//_downgrid.removeAll();      
 
 			var map_link = pdf_download_url;
 			var link_label = map_link.split('/');
@@ -611,7 +611,7 @@ function generate_Map(ndvi_file, shapefile, fieldvalue)
 				{label1: map_url}
 			];
 
-			_downgrid.loadData(mapdata);  
+			_downgrid.loadData(mapdata, true);  
 
 		}
 
@@ -657,7 +657,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
                 		Ext.MessageBox.hide();
                 		//Ext.example.msg('Done', 'NDVI map generated!');
                 		Ext.Msg.alert('Done', 'NDVI map generated.');
-                		}, 2000);
+                		}, 4000);
 					
 
 					//alert(_vector + ': ' + _property + ': ' + _feature + ': ' + ndvi_tif);
