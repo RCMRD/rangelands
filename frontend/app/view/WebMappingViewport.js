@@ -625,30 +625,13 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
 
     });
 
-    var output_panel = new Ext.Panel({
-        //region: 'west',
-        xtype: 'panel',
-        //width: 470,
-        title: 'Map Output',
-        //minWidth: 200,
-        //height: 400, 
-        autoScroll: true,
-        active:true,
-       // maxWidth: 500,
-        // title: 'Layers',
-        collapsible: true,
-        split: true,
-        items:[SingleSearchForm, layer_legend_tree, downloads]
-
-    }); 
-
 
     GeoExtPanel = new Ext.Panel ({
         region: 'west',
         xtype: 'panel',
         //width: 480,
         minWidth: 300,
-        height: 700, 
+        height: 500, 
         autoScroll: true,
         active:true,
        // maxWidth: 500,
@@ -658,7 +641,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
                 comp.doLayout();
             }, this)
         },
-        //title: 'Data',
+        title: 'Data',
         //collapsible: true,
         //split: true,
         layout: {
@@ -668,11 +651,35 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
             animate: true,
             activeOnTop: false
         },
-        items: [NdviSearchForm, AnomalyForm, VCIForm, output_panel]
+        items: [NdviSearchForm, AnomalyForm, VCIForm]
 
     }); 
 
-
+var GeneralTabs = Ext.create('Ext.tab.Panel', {
+    id: "generaltabsID",
+    layout: 'card',
+    region: 'west',
+    width:500,
+    minWidth:300,
+    //height: 600, 
+    //autoScroll: true,
+    animate: true,
+    preventHeader: true,
+     hideCollapseTool: true,
+    collapsible: true,
+    activeTab: 0,
+    split: true,
+    tabPosition: 'top',
+    items: [
+            GeoExtPanel, 
+        {
+            title: 'Map Composer',
+            items:[
+                SingleSearchForm, layer_legend_tree, downloads
+            ]
+        }
+    ]
+});
 
  function fix_to_bottom(){
 
@@ -687,7 +694,7 @@ WestPanel = new Ext.Panel({
     region: 'west',
     xtype: 'panel',
     width: 500,
-    height: 800, 
+    //height: 800, 
     minWidth: 300,
     collapsible: true,
     autoScroll: true,
@@ -696,7 +703,7 @@ WestPanel = new Ext.Panel({
     //  hideCollapseTool: true,
     split: true,
     items: [
-        GeoExtPanel, LogoPanel
+        GeneralTabs//, LogoPanel
     ],
     listeners: {
         collapse: function() {
