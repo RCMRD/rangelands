@@ -687,7 +687,7 @@ WestPanel = new Ext.Panel({
     region: 'west',
     xtype: 'panel',
     width: 500,
-    height: 700, 
+    height: 800, 
     minWidth: 300,
     collapsible: true,
     autoScroll: true,
