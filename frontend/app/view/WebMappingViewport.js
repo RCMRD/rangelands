@@ -641,7 +641,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
                 comp.doLayout();
             }, this)
         },
-        title: 'Data',
+        title: 'Filter Data',
         //collapsible: true,
         //split: true,
         layout: {
@@ -673,7 +673,7 @@ var GeneralTabs = Ext.create('Ext.tab.Panel', {
     items: [
             GeoExtPanel, 
         {
-            title: 'Map Composer',
+            title: 'Compose Map',
             items:[
                 SingleSearchForm, layer_legend_tree, downloads
             ]
