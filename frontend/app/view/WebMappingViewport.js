@@ -618,7 +618,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
         id: 'downgrid',
         //title: 'Downloads',
         columns: [
-            {text: "Download NDVI Map", width: 250, dataIndex: 'label1'}
+            {text: "Download NDVI Map", width: 400, dataIndex: 'label1'}
             
             
         ]
