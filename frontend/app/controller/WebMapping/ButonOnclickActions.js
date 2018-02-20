@@ -454,35 +454,61 @@ function makeGraph(ghgdata){
 
 function loadLayer(wms_name){
 
-	// clear current overlay
-	var current_layer = map.getLayersByName(current_wms);
-	if(current_layer.length != 0){
-		map.removeLayer(current_layer[0]);
-	}
+	// check layer availability
+	var _url = 'http://crest.rcmrd.org/raster/' + wms_name
 
-	var wms_layer = new OpenLayers.Layer.WMS(wms_name,
-			"http://apps.rcmrd.org:8080/geoserver/wms",
-			{
-			   layers: 'rangelands:' + wms_name,
-			   transparent: true,
-			   format: "image/png"
-			}, {
-			       buffer: 0,
-			       visibility: true,
-			       displayOutsideMaxExtent: true,
-			       displayInLayerSwitcher: true,
-			       isBaseLayer: false,
-			       yx : {'EPSG:4326' : true}
-			});
+	$.ajax({
+    	type: "GET",
+    	url: _url,
+    	async: false,
+    	dataType: "json",
+    	success: function(result){
+
+        	if (result == 'data unavailable'){
+
+        		Ext.Msg.alert("Data Unavailable","Please select another date");
+
+        	} else {
 
 
-	
-	map.addLayer(wms_layer);
+        		// clear current overlay
+				var current_layer = map.getLayersByName(current_wms);
+				if(current_layer.length != 0){
+					map.removeLayer(current_layer[0]);
+				}
 
-	map.setLayerIndex(wms_layer, map.layers.length-9);
+				var wms_layer = new OpenLayers.Layer.WMS(wms_name,
+						"http://apps.rcmrd.org:8080/geoserver/wms",
+						{
+						   layers: 'rangelands:' + wms_name,
+						   transparent: true,
+						   format: "image/png"
+						}, {
+						       buffer: 0,
+						       visibility: true,
+						       displayOutsideMaxExtent: true,
+						       displayInLayerSwitcher: true,
+						       isBaseLayer: false,
+						       yx : {'EPSG:4326' : true}
+						});
 
-	current_wms = wms_name;
-	
+
+				
+				map.addLayer(wms_layer);
+
+				map.setLayerIndex(wms_layer, map.layers.length-9);
+
+				current_wms = wms_name;
+
+
+
+        	}
+
+    	}
+	});
+
+
+
 
 }
 
@@ -657,7 +683,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
                 		Ext.MessageBox.hide();
                 		//Ext.example.msg('Done', 'NDVI map generated!');
                 		Ext.Msg.alert('Done', 'NDVI map generated.');
-                		}, 4000);
+                		}, 6000);
 					
 
 					//alert(_vector + ': ' + _property + ': ' + _feature + ': ' + ndvi_tif);
