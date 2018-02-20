@@ -677,12 +677,13 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 			           //animateTarget: 'mb7'
 			       });
 
+					generate_Map(ndvi_tif, _vector, _feature);
 
 					setTimeout(function(){
 
-						generate_Map(ndvi_tif, _vector, _feature);
+						
                 		Ext.MessageBox.hide();
-                		//Ext.example.msg('Done', 'NDVI map generated!');
+
                 		Ext.Msg.alert('Done', 'NDVI map generated.');
                 		}, 6000);
 					
