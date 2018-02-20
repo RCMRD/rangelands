@@ -460,7 +460,7 @@ function loadLayer(wms_name){
 	$.ajax({
     	type: "GET",
     	url: _url,
-    	async: false,
+    	//async: false,
     	dataType: "json",
 		crossDomain: true,
     	success: function(result){
