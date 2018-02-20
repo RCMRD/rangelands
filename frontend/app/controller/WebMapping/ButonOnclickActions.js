@@ -463,9 +463,9 @@ function loadLayer(wms_name){
     	//async: false,
     	dataType: "json",
 		crossDomain: true,
-    	success: function(result){
+    	success: function(data){
 
-        	if (result == 'data unavailable'){
+        	if (data.result == 'data unavailable'){
 
         		Ext.Msg.alert("Data Unavailable","Please select another date");
 
