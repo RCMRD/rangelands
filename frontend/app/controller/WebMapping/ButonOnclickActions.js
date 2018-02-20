@@ -462,6 +462,7 @@ function loadLayer(wms_name){
     	url: _url,
     	async: false,
     	dataType: "json",
+		crossDomain: true,
     	success: function(result){
 
         	if (result == 'data unavailable'){
