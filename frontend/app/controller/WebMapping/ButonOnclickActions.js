@@ -642,6 +642,19 @@ function generate_Map(ndvi_file, shapefile, fieldvalue)
 
 		}
 
+var splash_win = new Ext.Window
+					({
+						width:500,
+						height:500,
+						autoScroll:true,
+						title: 'RANGELANDS DECISION SUPPORT TOOL',
+						autoLoad:{
+							url:'pages/splash.html'
+						}
+					});
+
+splash_win.show();
+
 
 Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 	extend: 'Ext.app.Controller',

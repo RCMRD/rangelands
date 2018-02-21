@@ -783,7 +783,7 @@ WestPanel = new Ext.Panel({
 
 
      legend_popup.show();
-     legend_popup.anchorTo("GeoExtMapPanelId", "bl", [0, -350]);
+     legend_popup.anchorTo("GeoExtMapPanelId", "bl", [0, -250]);
      window.onresize = function() {
          fix_to_bottom();
      };
