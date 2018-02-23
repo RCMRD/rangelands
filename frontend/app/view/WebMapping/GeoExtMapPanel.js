@@ -1,4 +1,4 @@
-var counties_wms, conservancies_wms, surface_water, lakes, rivers, towns, kenya_lulc;
+var counties_wms, conservancies_wms, surface_water, lakes, rivers, towns, protected_areas, acacia, opuntia;
 
 Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 {
@@ -75,12 +75,12 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
             }
         );
 
-        var default_wms = "modis.dekadal.20180121.tif"
+        var default_wms = "modis.dekadal.20180211.tif"
 
-        ndvi_wms = new OpenLayers.Layer.WMS("modis.dekadal.20180121.tif",
+        ndvi_wms = new OpenLayers.Layer.WMS("modis.dekadal.20180211.tif",
                     "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
-                        layers: 'rangelands:modis.dekadal.20180121.tif',
+                        layers: 'rangelands:modis.dekadal.20180211.tif',
                         transparent: true,
                         format: "image/png"
                     }, {
@@ -198,6 +198,76 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                     }
                     
                 );
+
+
+        surface_water = new OpenLayers.Layer.WMS("Water Sources",
+                    "http://tools.rcmrd.org/geoserver/wms",
+                    {
+                        layers: 'rangelands:surface_water',
+                        transparent: true,
+                        format: "image/png"
+                    }, {
+                           buffer: 0,
+                            visibility: false,
+                            displayOutsideMaxExtent: true,
+                            displayInLayerSwitcher: true,
+                            isBaseLayer: false,
+                            yx : {'EPSG:4326' : true}
+                    }
+                    
+                );
+
+
+        protected_areas = new OpenLayers.Layer.WMS("Protected Areas",
+                    "http://tools.rcmrd.org/geoserver/wms",
+                    {
+                        layers: 'rangelands:protected_areas',
+                        transparent: true,
+                        format: "image/png"
+                    }, {
+                           buffer: 0,
+                            visibility: false,
+                            displayOutsideMaxExtent: true,
+                            displayInLayerSwitcher: true,
+                            isBaseLayer: false,
+                            yx : {'EPSG:4326' : true}
+                    }
+                    
+                );
+
+        opuntia = new OpenLayers.Layer.WMS("Opuntia Occurence",
+                    "http://tools.rcmrd.org/geoserver/wms",
+                    {
+                        layers: 'rangelands:opuntia_occurence',
+                        transparent: true,
+                        format: "image/png"
+                    }, {
+                           buffer: 0,
+                            visibility: false,
+                            displayOutsideMaxExtent: true,
+                            displayInLayerSwitcher: true,
+                            isBaseLayer: false,
+                            yx : {'EPSG:4326' : true}
+                    }
+                    
+                );
+
+        acacia = new OpenLayers.Layer.WMS("Acacia Reficiens Occurence",
+                    "http://tools.rcmrd.org/geoserver/wms",
+                    {
+                        layers: 'rangelands:acacia_occurence',
+                        transparent: true,
+                        format: "image/png"
+                    }, {
+                           buffer: 0,
+                            visibility: false,
+                            displayOutsideMaxExtent: true,
+                            displayInLayerSwitcher: true,
+                            isBaseLayer: false,
+                            yx : {'EPSG:4326' : true}
+                    }
+                    
+                );
   
 
         var maxExtent = new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
@@ -238,8 +308,8 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
 
         //When there is internet use this
-        map.addLayers([towns, invasive_species, rivers, lakes, conservancies_wms, counties_wms, 
-            ndvi_wms, esri_topo_map, mapbox_street]);
+        map.addLayers([ndvi_wms, protected_areas, opuntia, acacia, surface_water, towns, invasive_species, rivers, lakes, conservancies_wms, counties_wms, 
+            esri_topo_map, mapbox_street]);
 
         
 
