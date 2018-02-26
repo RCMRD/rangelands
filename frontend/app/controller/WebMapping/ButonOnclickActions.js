@@ -497,7 +497,7 @@ function loadLayer(wms_name){
 				
 				map.addLayer(wms_layer);
 
-				map.setLayerIndex(wms_layer, map.layers.length-9);
+				map.setLayerIndex(wms_layer, map.layers.length-13);
 
 				current_wms = wms_name;
 
