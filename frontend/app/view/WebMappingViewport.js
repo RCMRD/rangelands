@@ -641,7 +641,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
                 comp.doLayout();
             }, this)
         },
-        title: 'Filter Data',
+        title: 'Greeness Indicator',
         //collapsible: true,
         //split: true,
         layout: {
