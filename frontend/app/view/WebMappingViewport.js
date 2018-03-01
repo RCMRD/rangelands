@@ -808,7 +808,7 @@ WestPanel = new Ext.Panel({
 				{
 					xtype: 'panel',
 					region: 'north',
-					height: 60, //orignal 60
+					height: 60, //original 60
 					html: '<div class="fire"><div class="satimage"><div class="fireimage"><div class="topcont">' +
                     '<div class="logobox"><a href=""><img alt="RCMRD" width="153"' +
                     ' height="53" class="rcmrd" src="assets/images/rcmrd.png"></a></div><h1 class="topheader">'+

@@ -607,12 +607,24 @@ function generate_Map(ndvi_file, shapefile, fieldvalue)
 		{
 			console.log("Job ID: " + jobInfo.jobId);
 			gpTask.getResultData(jobInfo.jobId,"PDF_Output_File", downloadFile);
+			Ext.Msg.alert('Done', 'NDVI map generated.');
 		}
 		
 		function onTaskStatus(jobInfo)
 		{
 			//document.getElementById("Download_PDF_Output_File").innerHTML =jobInfo.jobStatus;
 			console.log(jobInfo.jobStatus);
+
+			Ext.MessageBox.show({
+			           msg: 'Generating map, please wait...',
+			           //progressText: 'Processing...',
+			           width:300,
+			           wait:true,
+			           //waitConfig: {interval:200},
+			           icon:'ext-mb-download', //custom class in msg-box.html
+			           iconHeight: 50
+			           //animateTarget: 'mb7'
+			       });
 		}
 
 		function onTaskFailure(error) 
@@ -679,26 +691,18 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 						_property = 'name';
 					}
 
-					Ext.MessageBox.show({
-			           msg: 'Generating map, please wait...',
-			           progressText: 'Processing...',
-			           width:300,
-			           wait:true,
-			           //waitConfig: {interval:200},
-			           icon:'ext-mb-download', //custom class in msg-box.html
-			           iconHeight: 50
-			           //animateTarget: 'mb7'
-			       });
+					
 
 					generate_Map(ndvi_tif, _vector, _feature);
 
+					/*
 					setTimeout(function(){
 
 						
                 		Ext.MessageBox.hide();
 
                 		Ext.Msg.alert('Done', 'NDVI map generated.');
-                		}, 6000);
+                		}, 6000); */
 					
 
 					//alert(_vector + ': ' + _property + ': ' + _feature + ': ' + ndvi_tif);
