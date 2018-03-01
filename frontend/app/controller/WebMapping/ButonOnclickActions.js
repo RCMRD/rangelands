@@ -645,7 +645,7 @@ function generate_Map(ndvi_file, shapefile, fieldvalue)
 var splash_win = new Ext.Window
 					({
 						width:500,
-						height:500,
+						height:550,
 						autoScroll:true,
 						title: 'RANGELANDS DECISION SUPPORT TOOL',
 						autoLoad:{
