@@ -607,7 +607,7 @@ function generate_Map(ndvi_file, shapefile, fieldvalue)
 		{
 			console.log("Job ID: " + jobInfo.jobId);
 			gpTask.getResultData(jobInfo.jobId,"PDF_Output_File", downloadFile);
-			Ext.Msg.alert('Done', 'NDVI map generated.');
+			
 		}
 		
 		function onTaskStatus(jobInfo)
@@ -650,7 +650,11 @@ function generate_Map(ndvi_file, shapefile, fieldvalue)
 				{label1: map_url}
 			];
 
-			_downgrid.loadData(mapdata, true);  
+			_downgrid.loadData(mapdata, true); 
+
+			var _msg = "NDVI map generated <a href='" + map_link + "' target=_blank>View Map</a>";
+
+			Ext.Msg.alert('Done', _msg); 
 
 		}
 
