@@ -76,8 +76,8 @@ LogoPanel = new Ext.Panel({
     xtype: 'panel',
     id: 'logopanelID',
     height: 90,
-    width: 330,
-    minWidth: 260,
+    width: 500,
+    minWidth: 300,
     collapsible: true,
     collapseMode: 'mini',
     preventHeader: true,
@@ -703,7 +703,7 @@ WestPanel = new Ext.Panel({
     //  hideCollapseTool: true,
     split: true,
     items: [
-        GeneralTabs//, LogoPanel
+        GeneralTabs, LogoPanel
     ],
     listeners: {
         collapse: function() {

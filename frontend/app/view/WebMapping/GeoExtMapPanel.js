@@ -80,7 +80,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
         ndvi_wms = new OpenLayers.Layer.WMS("modis.dekadal.20180211.tif",
                     "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
-                        layers: 'rangelands:modis.dekadal.20180211.tif',
+                        layers: 'rangelands:modis.dekadal.20180221.tif',
                         transparent: true,
                         format: "image/png"
                     }, {

@@ -695,9 +695,26 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 						_property = 'name';
 					}
 
+					var all_layers = [];
+
+					
+					var map_layers = map.layers;
+					//alert(map_layers[3].isBaseLayer);
+					for(var i=0; i < map_layers.length; i++){
+						if(map_layers[i].isBaseLayer == false){
+							if(map_layers[i].visibility == true){
+
+								all_layers.push(map_layers[i].name);
+								//alert(map_layers[i].name);
+
+							}
+						}
+					}
+
 					
 
-					generate_Map(ndvi_tif, _vector, _feature);
+					//generate_Map(ndvi_tif, _vector, _feature);
+
 
 					/*
 					setTimeout(function(){
