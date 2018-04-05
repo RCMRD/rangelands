@@ -57,8 +57,14 @@ Ext.rangelands.conservancies = [
 ];
 
 Ext.rangelands.boundary = [
-    ['County'], 
-    ['Conservancy']
+    ['Counties', 'County'], 
+    ['NRT Conservancies', 'Conservancy'],
+    ['NRT Grazing Blocks', 'NRT Grazing Blocks'],
+    ['NRT Rehabilitation Areas', 'NRT Rehabilitation Areas'],
+    ['Lewa Grazing Blocks', 'Lewa Grazing Blocks'],
+    ['LWF Areas', 'LWF Areas'],
+    ['KR Grazing Areas', 'KR Grazing Areas'],
+    ['KR Rehab Areas', 'KR Rehab Areas']
 ];
 
 

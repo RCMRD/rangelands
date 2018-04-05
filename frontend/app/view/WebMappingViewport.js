@@ -548,11 +548,11 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
                     width: 300,
                     id: 'boundarytype',
                     store: Ext.create('Ext.data.ArrayStore', {
-                        fields: ['_value'],
+                        fields: ['_display','_value'],
                         data : Ext.rangelands.boundary 
                     }),
                     valueField: '_value',
-                    displayField: '_value',
+                    displayField: '_display',
                     typeAhead: true,
                     queryMode: 'local',
                     emptyText: 'Select..',
