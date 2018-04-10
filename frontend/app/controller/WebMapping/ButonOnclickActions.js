@@ -719,7 +719,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 					
 
-					//generate_Map(ndvi_tif, _vector, _feature);
+					generate_Map(ndvi_tif, _vector, _feature);
 
 
 					/*

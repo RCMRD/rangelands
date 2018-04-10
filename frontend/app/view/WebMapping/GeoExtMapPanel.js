@@ -75,12 +75,12 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
             }
         );
 
-        var default_wms = "modis.dekadal.20180311.tif"
+        var default_wms = "modis.dekadal.20180321.tif"
 
-        ndvi_wms = new OpenLayers.Layer.WMS("modis.dekadal.20180311.tif",
+        ndvi_wms = new OpenLayers.Layer.WMS("modis.dekadal.20180321.tif",
                     "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
-                        layers: 'rangelands:modis.dekadal.20180311.tif',
+                        layers: 'rangelands:modis.dekadal.20180321.tif',
                         transparent: true,
                         format: "image/png"
                     }, {
