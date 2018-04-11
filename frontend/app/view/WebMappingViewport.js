@@ -85,9 +85,9 @@ LogoPanel = new Ext.Panel({
     items:[
         {
             xtype: 'panel',
-            html:'<div class="logos"><a target="new" href="http://www.rcmrd.org/?page_id=5130"><img alt="SERVIR East and Southern Africa" width="240" height="35" src="assets/images/servir-easafricab.png"></a>'+
-            '<a target="new" href="http://www.usaid.gov/"><img alt="USAID" width="134" height="40" src="assets/images/usaid.png"></a>'+
-            '<a target="new" href="http://www.nasa.gov/"><img alt="NASA" width="49" height="40" src="assets/images/nasa.png"></a> </div>'
+            html:'<div class="logos"><a target="new" href="http://www.usaid.gov/"><img alt="USAID" width="134" height="40" src="assets/images/usaid.png"></a>'+
+            '<a target="new" href="http://www.nasa.gov/"><img alt="NASA" width="49" height="40" src="assets/images/nasa.png"></a>'+
+            '<a target="new" href="http://www.rcmrd.org/?page_id=5130"><img alt="SERVIR East and Southern Africa" width="240" height="35" src="assets/images/servir-easafricab.png"></a> </div>'
         }
     ]
 }); 
@@ -660,7 +660,7 @@ var GeneralTabs = Ext.create('Ext.tab.Panel', {
     layout: 'card',
     region: 'west',
     width:500,
-    minWidth:300,
+    minWidth:500,
     //height: 600, 
     //autoScroll: true,
     animate: true,
@@ -695,7 +695,7 @@ WestPanel = new Ext.Panel({
     xtype: 'panel',
     width: 500,
     //height: 800, 
-    minWidth: 300,
+    minWidth: 500,
     collapsible: true,
     autoScroll: true,
     title: '',
