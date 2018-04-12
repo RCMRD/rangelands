@@ -422,9 +422,23 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 					if( _boundarytype == 'County'){
 						_vector = "Kenya_Range_Counties.shp";
 						_property = 'county';
-					} else {
-						_vector = "Centre-Conservancies_Ver1-Nov-15.shp";
-						_property = 'name';
+
+					} else if( _boundarytype == 'NRT Grazing Blocks'){
+						_vector = "NRT_Grazing_Blocks.shp";
+						_property = 'GrazingBlo';
+
+					} else if( _boundarytype == 'NRT Rehabilitation Areas'){
+						_vector = "NRT_Rehab_Areas.shp";
+						_property = 'Site_1';
+
+					} else if( _boundarytype == 'LWF Areas'){
+						_vector = "LWF_Areas.shp";
+						_property = 'NAME_96';
+
+					}
+					else {
+						_vector = "NRT_Conservancies.shp";
+						_property = 'Conservanc';
 					}
 
 					var all_layers = [];
