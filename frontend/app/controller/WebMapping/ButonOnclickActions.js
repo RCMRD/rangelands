@@ -1,60 +1,15 @@
 // some data used in the forms
 Ext.namespace('Ext.rangelands');
 
-Ext.rangelands.counties = [
-    ['Turkana'], 
-    ['Marsabit'], 
-    ['Mandera'], 
-    ['Wajir'], 
-    ['West Pokot'], 
-    ['Samburu'],
-    ['Isiolo'], 
-    ['Baringo'], 
-    ['Garissa'], 
-    ['Laikipia'], 
-    ['Meru'], 
-    ['Tharaka'],
-    ['Nyeri'], 
-    ['Tana River'], 
-    ['Kitui'], 
-    ['Embu'], 
-    ['Narok'], 
-    ['Machakos'],
-    ['Kajiado'], 
-    ['Makueni'], 
-    ['Lamu'], 
-    ['Kilifi'], 
-    ['Taita Taveta'], 
-    ['Kwale'] 
-    
-];
+Ext.rangelands.counties = [];
 
-Ext.rangelands.conservancies = [
-    ['Shurr'], 
-    ['Melako'], 
-    ['Namunyak'], 
-    ['Mathews Range Forest'], 
-    ['Biliqo Bulesa'], 
-    ['Sera'], 
-    ['Meibae'], 
-    ['Ltungai'], 
-    ['West Gate'], 
-    ['Kalama'], 
-    ['Nakuprat-Gotu'], 
-    ['Ruko'], 
-    ['Mpus Kutuk'], 
-    ['Shaba National Reserve'], 
-    ['Samburu National Reserve'], 
-    ['Buffalo National Reserve'], 
-    ['Nasuulu'], 
-    ['Naibunga'], 
-    ['Lekurruki'], 
-    ['Leparua'], 
-    ['II Ngwesi'], 
-    ['Ngare Ndare'], 
-    ['Jaldessa'], 
-    ['Songa'], 
-];
+Ext.rangelands.conservancies = [];
+
+Ext.rangelands.nrt_grazing_blocks = [];
+
+Ext.rangelands.nrt_rehab_areas = [];
+
+Ext.rangelands.lwf_areas = [];
 
 Ext.rangelands.boundary = [
     ['Counties', 'County'], 
@@ -64,302 +19,9 @@ Ext.rangelands.boundary = [
     ['LWF Areas', 'LWF Areas'],
 ];
 
+var countydata = [];
 
-var countydata = [
-	{
-		"name": "Turkana",
-		"centerX": 35.434957399135776,
-		"centerY": 3.412963769747267,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Marsabit",
-		"centerX": 37.567986408043808,
-		"centerY": 2.980503398974592,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Mandera",
-		"centerX": 40.736653326452362,
-		"centerY": 3.438399557185803,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Wajir",
-		"centerX": 40.03355622066195,
-		"centerY": 1.809709378068272,
-		"zoomLevel": 8
-	},
-	{
-		"name": "West Pokot",
-		"centerX": 35.243095626477626,
-		"centerY": 1.727335358232473,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Samburu",
-		"centerX": 37.116796177113855,
-		"centerY": 1.319876783265621,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Isiolo",
-		"centerX": 38.539095932509682,
-		"centerY": 1.011825872671544,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Baringo",
-		"centerX": 35.940325289879254,
-		"centerY": 0.67643441156588,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Garissa",
-		"centerX": 40.180794458468675,
-		"centerY": -0.488364576944122,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Laikipia",
-		"centerX": 36.762521620296219,
-		"centerY": 0.323864787860787,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Meru",
-		"centerX": 37.760178795246119,
-		"centerY": 0.171766123780441,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Tharaka",
-		"centerX": 37.871707603168979,
-		"centerY": -0.199028135167895,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Nyeri",
-		"centerX": 36.953828854934983,
-		"centerY": -0.34307614059664,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Tana River",
-		"centerX": 39.412165071680832,
-		"centerY": -1.557155314307147,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Kitui",
-		"centerX": 38.405844150137817,
-		"centerY": -1.48590304102223,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Embu",
-		"centerX": 37.62519011144893,
-		"centerY": -0.601300590990351,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Narok",
-		"centerX": 35.575278974683243,
-		"centerY": -1.253918786449594,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Machakos",
-		"centerX": 37.405647897842705,
-		"centerY": -1.289852643113056,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Kajiado",
-		"centerX": 36.909127892476178,
-		"centerY": -2.120649731548841,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Makueni",
-		"centerX": 37.799673665186361,
-		"centerY": -2.166198118492794,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Lamu",
-		"centerX": 40.766286244921716,
-		"centerY": -2.039559640723352,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Kilifi",
-		"centerX": 39.683142893748538,
-		"centerY": -3.173136117926263,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Taita Taveta",
-		"centerX": 38.418100077357778,
-		"centerY": -3.432458074217745,
-		"zoomLevel": 8
-	},
-	{
-		"name": "Kwale",
-		"centerX": 39.151555998668677,
-		"centerY": -4.139057670119397,
-		"zoomLevel": 8
-	}
-
-];
-
-
-var conservancydata = [
-	{
-		"name": "Shurr",
-		"centerX": 38.504086077245439,
-		"centerY": 2.104798047414867,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Melako",
-		"centerX": 37.929294591303318,
-		"centerY": 1.681288719037125,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Meibae",
-		"centerX": 37.137955972757126,
-		"centerY": 0.899939142200688,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Namunyak",
-		"centerX": 37.398499317102903,
-		"centerY": 1.229172240762179,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Mathews Range Forest",
-		"centerX": 37.316316685507928,
-		"centerY": 1.224416517537103,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Biliqo Bulesa",
-		"centerX": 38.273856830584613,
-		"centerY": 1.131678438301432,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Sera",
-		"centerX": 37.801581888094717,
-		"centerY": 1.019848770175185,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Ltungai",
-		"centerX": 36.490652025736722,
-		"centerY": 0.899765238242347,
-		"zoomLevel": 10
-	},
-	{
-		"name": "West Gate",
-		"centerX": 37.349951569196847,
-		"centerY": 0.731201510768958,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Kalama",
-		"centerX": 37.515347982620149,
-		"centerY": 0.724845478946103,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Nakuprat-Gotu",
-		"centerX": 37.965887172540548,
-		"centerY": 0.671947797878047,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Ruko",
-		"centerX": 36.146901773158369,
-		"centerY": 0.658888779882193,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Mpus Kutuk",
-		"centerX": 37.239276415845971,
-		"centerY": 0.605369072836604,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Shaba National Reserve",
-		"centerX": 37.839661871542184,
-		"centerY": 0.646436022714284,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Samburu National Reserve",
-		"centerX": 37.53900881477751,
-		"centerY": 0.612004922487909,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Buffalo National Reserve",
-		"centerX": 37.606455395891253,
-		"centerY": 0.558429884676525,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Nasuulu",
-		"centerX": 37.488278821856312,
-		"centerY": 0.487451365262201,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Naibunga",
-		"centerX": 37.035172249501514,
-		"centerY": 0.476966669835191,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Lekurruki",
-		"centerX": 37.265718115241647,
-		"centerY": 0.470165270253003,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Leparua",
-		"centerX": 37.449062966413244,
-		"centerY": 0.366856513292455,
-		"zoomLevel": 10
-	},
-	{
-		"name": "II Ngwesi",
-		"centerX": 37.357753926475596,
-		"centerY": 0.333877290555607,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Ngare Ndare",
-		"centerX": 37.365842345225055,
-		"centerY": 0.161743162735017,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Jaldessa",
-		"centerX": 38.075411731210941,
-		"centerY": 2.349565467730028,
-		"zoomLevel": 10
-	},
-	{
-		"name": "Songa",
-		"centerX": 37.913859086239171,
-		"centerY": 2.159860271950585,
-		"zoomLevel": 10
-	}
-];
+var conservancydata = [];
 
 
 Ext.rangelands.years = [
@@ -437,9 +99,59 @@ Ext.rangelands.dekads4 = [
     
 ];
 
+function loadConfig(){
+
+	var _url = 'http://frost.rcmrd.org/config/'
+
+	$.ajax({
+    	type: "GET",
+    	url: _url,
+    	//async: false,
+    	dataType: "json",
+		crossDomain: true,
+    	success: function(data){
+
+
+    		for(var i=0; i < data.all_counties.length; i++){
+    			Ext.rangelands.counties.push([data.all_counties[i].name, data.all_counties[i].longitude, data.all_counties[i].latitude]);
+    		}
+
+    		for(var i=0; i < data.all_lwf_areas.length; i++){
+    			Ext.rangelands.lwf_areas.push([data.all_lwf_areas[i].name, data.all_lwf_areas[i].longitude, data.all_lwf_areas[i].latitude]);
+    		}
+
+    		for(var i=0; i < data.all_nrt_conservancies.length; i++){
+    			Ext.rangelands.conservancies.push([data.all_nrt_conservancies[i].name, data.all_nrt_conservancies[i].longitude, data.all_nrt_conservancies[i].latitude]);
+    		}
+
+
+    		for(var i=0; i < data.all_nrt_rehab_areas.length; i++){
+    			Ext.rangelands.nrt_rehab_areas.push([data.all_nrt_rehab_areas[i].name, data.all_nrt_rehab_areas[i].longitude, data.all_nrt_rehab_areas[i].latitude]);
+    		}
+
+
+    		for(var i=0; i < data.all_nrt_grazing_blocks.length; i++){
+    			Ext.rangelands.nrt_grazing_blocks.push([data.all_nrt_grazing_blocks[i].name, data.all_nrt_grazing_blocks[i].longitude, data.all_nrt_grazing_blocks[i].latitude]);
+    		}
+
+        	
+
+    	}
+	});
+
+
+
+
+}
+
+loadConfig();
+
+
+
 dojo.require("esri.tasks.gp");
 
 var _county;
+var _boundary;
 var ndvi_tif = '';
 var current_wms = '';
 
@@ -532,7 +244,24 @@ function highLight(_layer, _name){
 	if( _layer == 'County'){
 		_layer_name = "counties";
 		property_name = 'county';
-	} else {
+	} 
+
+	else if( _layer == 'NRT Grazing Blocks'){
+		_layer_name = "nrt_grazing_blocks";
+		property_name = 'grazingblo';
+	} 
+
+	else if( _layer == 'NRT Rehabilitation Areas'){
+		_layer_name = "nrt_rehab_areas";
+		property_name = 'site_1';
+	} 
+
+	else if( _layer == 'LWF Areas'){
+		_layer_name = "lwf_areas";
+		property_name = 'name_96';
+	} 
+
+	else {
 		_layer_name = "conservancies";
 		property_name = 'name';
 	}
@@ -745,42 +474,103 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 			'WebMappingViewport combobox[name=county]': {
 				select:function(valueField) {
-					_county = valueField.value;
+					_boundary = valueField.value;
 
 					var boundarytype = Ext.getCmp('boundarytype').getValue();
 
+					
+
 					if(boundarytype == 'County'){
-						for(var i=0; i < countydata.length; i++){
-							if(countydata[i].name == _county){
+						for(var i=0; i < Ext.rangelands.counties.length; i++){
+							if(Ext.rangelands.counties[i][0] == _boundary){
 								
 								map.setCenter(
-	                            	new OpenLayers.LonLat(countydata[i].centerX, countydata[i].centerY).transform(
+	                            	new OpenLayers.LonLat(Ext.rangelands.counties[i][1], Ext.rangelands.counties[i][2]).transform(
 	                                	new OpenLayers.Projection("EPSG:4326"),
-	                                	map.getProjectionObject() ), countydata[i].zoomLevel);
+	                                	map.getProjectionObject() ), 8);
 
 
-								highLight(boundarytype, _county);
-
-							
-							}
-						}
-					} else {
-
-						for(var i=0; i < conservancydata.length; i++){
-							if(conservancydata[i].name == _county){
-								
-								map.setCenter(
-	                            	new OpenLayers.LonLat(conservancydata[i].centerX, conservancydata[i].centerY).transform(
-	                                	new OpenLayers.Projection("EPSG:4326"),
-	                                	map.getProjectionObject() ), conservancydata[i].zoomLevel);
-
-								highLight(boundarytype, _county);
+								highLight(boundarytype, _boundary);
 
 							
 							}
 						}
 
+					} else if(boundarytype == 'NRT Grazing Blocks'){
+
+						for(var i=0; i < Ext.rangelands.nrt_grazing_blocks.length; i++){
+							if(Ext.rangelands.nrt_grazing_blocks[i][0] == _boundary){
+								
+								map.setCenter(
+	                            	new OpenLayers.LonLat(Ext.rangelands.nrt_grazing_blocks[i][1], Ext.rangelands.nrt_grazing_blocks[i][2]).transform(
+	                                	new OpenLayers.Projection("EPSG:4326"),
+	                                	map.getProjectionObject() ), 12);
+
+
+								highLight(boundarytype, _boundary);
+
+							
+							}
+						}
+						
 					}
+
+					else if(boundarytype == 'NRT Rehabilitation Areas'){
+						
+						for(var i=0; i < Ext.rangelands.nrt_rehab_areas.length; i++){
+							if(Ext.rangelands.nrt_rehab_areas[i][0] == _boundary){
+								
+								map.setCenter(
+	                            	new OpenLayers.LonLat(Ext.rangelands.nrt_rehab_areas[i][1], Ext.rangelands.nrt_rehab_areas[i][2]).transform(
+	                                	new OpenLayers.Projection("EPSG:4326"),
+	                                	map.getProjectionObject() ), 12);
+
+
+								highLight(boundarytype, _boundary);
+
+							
+							}
+						}
+						
+					}
+
+					else if(boundarytype == 'LWF Areas'){
+						
+						for(var i=0; i < Ext.rangelands.lwf_areas.length; i++){
+							if(Ext.rangelands.lwf_areas[i][0] == _boundary){
+								
+								map.setCenter(
+	                            	new OpenLayers.LonLat(Ext.rangelands.lwf_areas[i][1], Ext.rangelands.lwf_areas[i][2]).transform(
+	                                	new OpenLayers.Projection("EPSG:4326"),
+	                                	map.getProjectionObject() ), 12);
+
+
+								highLight(boundarytype, _boundary);
+
+							
+							}
+						}
+						
+					}
+
+
+					else {
+
+						for(var i=0; i < Ext.rangelands.conservancies.length; i++){
+							if(Ext.rangelands.conservancies[i][0] == _boundary){
+								
+								map.setCenter(
+	                            	new OpenLayers.LonLat(Ext.rangelands.conservancies[i][1], Ext.rangelands.conservancies[i][2]).transform(
+	                                	new OpenLayers.Projection("EPSG:4326"),
+	                                	map.getProjectionObject() ), 12);
+
+								highLight(boundarytype, _boundary);
+
+							
+							}
+						}
+
+					} 
 
 					// enable button
 					Ext.getCmp('generate_map').enable();
@@ -802,7 +592,22 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 						_store.loadData(Ext.rangelands.counties);
 
-					} else {
+					} else if(valueField.value == 'NRT Grazing Blocks'){
+						_store.loadData(Ext.rangelands.nrt_grazing_blocks);
+
+					}
+
+					else if(valueField.value == 'NRT Rehabilitation Areas'){
+						_store.loadData(Ext.rangelands.nrt_rehab_areas);
+						
+					}
+
+					else if(valueField.value == 'LWF Areas'){
+						_store.loadData(Ext.rangelands.lwf_areas);
+						
+					}
+
+					else {
 								
 						_store.loadData(Ext.rangelands.conservancies);
 					}
