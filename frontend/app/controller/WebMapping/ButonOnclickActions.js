@@ -262,8 +262,8 @@ function highLight(_layer, _name){
 	} 
 
 	else {
-		_layer_name = "conservancies";
-		property_name = 'name';
+		_layer_name = "nrt_conservancies";
+		property_name = 'conservanc';
 	}
 
 	sld += '<sld:StyledLayerDescriptor xmlns="http://www.opengis.net/sld" xmlns:sld="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml" version="1.0.0">';
