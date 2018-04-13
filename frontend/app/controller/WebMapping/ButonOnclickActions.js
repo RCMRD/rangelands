@@ -146,6 +146,170 @@ function loadConfig(){
 
 loadConfig();
 
+function drawChart(region, data1){
+
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    });
+
+            $('#chart_div').highcharts({
+
+                credits: 
+                {
+                    text: 'MODIS NDVI',
+                    href: 'http://rcmrd.org'
+                },
+
+                chart: 
+                {
+                    type: 'line'
+                },
+
+                title:
+                {
+                    text: 'MODIS NDVI (10-day) timeseries for '+region+' County'
+                },
+
+                xAxis:
+                {
+                    tickWidth: 1,
+                    gridLineWidth: 1,
+                    type: 'datetime',
+                    //categories: [],
+					dateTimeLabelFormats: {
+           				day: '%d-%m-%Y'    //ex- 01 Jan 2017
+        			},
+                    labels:{
+						 format: '{value:%d-%m-%Y}'
+                     
+                    }
+                },
+
+                yAxis: [
+						{
+                            labels:{formatter:function(){return this.value+" "},
+                            style:{color:"#4572A7"}},
+                            title:{text:"NDVI",style:{color:"#4572A7"}},
+							//min: 2,
+							//max: 309
+							//opposite:!0,
+                        }
+						
+						
+                
+                ],
+
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+
+                tooltip:{
+                    shared: true,
+                    crosshairs: true
+                },
+
+                plotOptions:{
+                    series : 
+                    {
+                        cursor : 'pointer',
+                        point : 
+                        {
+                            events : 
+                            {
+                                click : function(e){
+                                    //var chart = $('#highcharts-container').highcharts();
+                                    //$chartName = chart.series[0].options.name;
+                                 
+                                }
+                            }
+                        },
+                        marker : 
+                        {
+                            lineWidth : 1
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: 'MODIS NDVI',
+                        data: data1,
+						yAxis: 0
+                    }
+                   
+                    
+                ]
+
+                
+            });
+
+}
+
+function plotGraph(region){
+
+	//alert('Drawing graph');
+	//dt_timestamp__gte=2015-09-01T03:00&dt_timestamp__lte=2015-10-05T09:00
+
+	var results1 = [];
+
+	
+
+	$.ajax({
+	    type: "GET",
+	    url: 'http://frost.rcmrd.org/timeseries/'+region+'/',
+	    async: false,
+	    dataType: "json",
+	    success: function(data){
+
+	        //console.log(data.length);
+	       
+	        for(var i = 0; i < data.length; i++){
+	        	var datestamp = data[i].date;
+	        	var year_ = parseInt(datestamp.slice(0,4));
+	        	var month_ = parseInt(datestamp.slice(4,6)) - 1;
+	        	var day_ = parseInt(datestamp.slice(6,8));
+
+	            var _date = Date.UTC(year_, month_, day_);
+
+				var ndvi = data[i].ndvi;
+
+				//console.log(_date);
+	            
+
+	            results1.push([_date, ndvi]);
+	            
+	        }
+
+	        //console.log(results1);
+	        
+	        drawChart(region, results1);
+
+
+	      
+			var chart_win = new Ext.Window
+					({
+						width:750,
+						height:450,
+						autoScroll:true,
+						title: 'MODIS NDVI Time Series',
+						contentEl: 'chart_div'
+					});
+
+			chart_win.show(); 
+			
+
+	        
+	       
+
+	    }
+	});
+
+
+}
 
 
 dojo.require("esri.tasks.gp");
@@ -478,9 +642,31 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 				}
 			},
 
-			'WebMappingViewport button[action=loadMonthly]':
+			'WebMappingViewport button[action=updateGraph]':
 			{
 				click:function() {
+
+					var region = Ext.getCmp('county').getValue();
+
+					Ext.MessageBox.show({
+			           msg: 'Plotting timeseries, please wait...',
+			           //progressText: 'Processing...',
+			           width:300,
+			           wait:true,
+			           //waitConfig: {interval:200},
+			           icon:'ext-mb-download', //custom class in msg-box.html
+			           iconHeight: 50
+			           //animateTarget: 'mb7'
+			       });
+
+					setTimeout(function(){
+
+						plotGraph(region);
+                		Ext.MessageBox.hide();
+                		//Ext.example.msg('Done', 'inundation map generated!');
+                		}, 8000);
+
+					
 
 									
 				}

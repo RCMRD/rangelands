@@ -26,25 +26,6 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
        
         ///Baselayers
-        var gphy = new OpenLayers.Layer.Google(
-            "Google Physical Terrain",
-            {isBaseLayer: true, type: google.maps.MapTypeId.TERRAIN, visibility:false, transitionEffect: 'resize'}
-            );
-
-        var gmap = new OpenLayers.Layer.Google(
-                    "Google Streets", // the default
-                    {isBaseLayer: true,numZoomLevels: 20,visibility:false, transitionEffect: 'resize'}
-                    );
-
-        var ghyb = new OpenLayers.Layer.Google(
-            "Google Hybrid",
-            {isBaseLayer: true,type: google.maps.MapTypeId.HYBRID, numZoomLevels: 22,visibility:false, transitionEffect: 'resize'}
-            );
-
-        var gsat = new OpenLayers.Layer.Google(
-            "Google Satellite",
-            {isBaseLayer: true,type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 20,visibility:false, transitionEffect: 'resize'}
-            );
 
         var mapbox_street = new OpenLayers.Layer.XYZ("Mapbox Street",
             ["http://a.tiles.mapbox.com/v4/mapbox.streets/${z}/${x}/${y}.png?access_token=pk.eyJ1Ijoid29uZGllIiwiYSI6InlKcXpXT1UifQ.BQ3hMXdyffGusTRN8JnWOg"], {
