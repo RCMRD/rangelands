@@ -101,7 +101,7 @@ Ext.rangelands.dekads4 = [
 
 function loadConfig(){
 
-	var _url = 'http://frost.rcmrd.org/config/'
+	var _url = 'http://tools.rcmrd.org/config/'
 
 	$.ajax({
     	type: "GET",
