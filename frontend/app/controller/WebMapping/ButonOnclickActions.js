@@ -334,7 +334,7 @@ function makeGraph(ghgdata){
 function loadLayer(wms_name){
 
 	// check layer availability
-	var _url = 'http://crest.rcmrd.org/raster/' + wms_name
+	var _url = 'http://tools.rcmrd.org/raster/' + wms_name
 
 	$.ajax({
     	type: "GET",
