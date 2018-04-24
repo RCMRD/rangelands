@@ -596,7 +596,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
             text: 'Time Series',
             id:'graph_button',
             width: 100,
-            //disabled: true,
+            disabled: true,
             action: 'updateGraph'
             //action: 'singleSearchAction'
         },
