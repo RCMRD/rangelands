@@ -11,12 +11,15 @@ Ext.rangelands.nrt_rehab_areas = [];
 
 Ext.rangelands.lwf_areas = [];
 
+Ext.rangelands.lewa_blocks = [];
+
 Ext.rangelands.boundary = [
     ['Counties', 'County'], 
     ['NRT Conservancies', 'Conservancy'],
     ['NRT Grazing Blocks', 'NRT Grazing Blocks'],
     ['NRT Rehabilitation Areas', 'NRT Rehabilitation Areas'],
     ['LWF Areas', 'LWF Areas'],
+    ['Lewa Blocks', 'Lewa Blocks']
 ];
 
 var countydata = [];
@@ -101,7 +104,7 @@ Ext.rangelands.dekads4 = [
 
 function loadConfig(){
 
-	var _url = 'http://tools.rcmrd.org/config/'
+	var _url = 'http://tools.rcmrd.org/appconfig/'
 
 	$.ajax({
     	type: "GET",
@@ -112,27 +115,33 @@ function loadConfig(){
     	success: function(data){
 
 
-    		for(var i=0; i < data.all_counties.length; i++){
-    			Ext.rangelands.counties.push([data.all_counties[i].name, data.all_counties[i].longitude, data.all_counties[i].latitude]);
+    		for(var i=0; i < data.kenya_range_counties.length; i++){
+    			Ext.rangelands.counties.push([data.kenya_range_counties[i].name, data.kenya_range_counties[i].longitude, data.kenya_range_counties[i].latitude]);
+    		}
+    		
+    		for(var i=0; i < data.lwf_areas.length; i++){
+    			Ext.rangelands.lwf_areas.push([data.lwf_areas[i].name, data.lwf_areas[i].longitude, data.lwf_areas[i].latitude]);
     		}
 
-    		for(var i=0; i < data.all_lwf_areas.length; i++){
-    			Ext.rangelands.lwf_areas.push([data.all_lwf_areas[i].name, data.all_lwf_areas[i].longitude, data.all_lwf_areas[i].latitude]);
-    		}
-
-    		for(var i=0; i < data.all_nrt_conservancies.length; i++){
-    			Ext.rangelands.conservancies.push([data.all_nrt_conservancies[i].name, data.all_nrt_conservancies[i].longitude, data.all_nrt_conservancies[i].latitude]);
-    		}
-
-
-    		for(var i=0; i < data.all_nrt_rehab_areas.length; i++){
-    			Ext.rangelands.nrt_rehab_areas.push([data.all_nrt_rehab_areas[i].name, data.all_nrt_rehab_areas[i].longitude, data.all_nrt_rehab_areas[i].latitude]);
+    		for(var i=0; i < data.nrt_conservancies.length; i++){
+    			Ext.rangelands.conservancies.push([data.nrt_conservancies[i].name, data.nrt_conservancies[i].longitude, data.nrt_conservancies[i].latitude]);
     		}
 
 
-    		for(var i=0; i < data.all_nrt_grazing_blocks.length; i++){
-    			Ext.rangelands.nrt_grazing_blocks.push([data.all_nrt_grazing_blocks[i].name, data.all_nrt_grazing_blocks[i].longitude, data.all_nrt_grazing_blocks[i].latitude]);
+    		for(var i=0; i < data.nrt_rehab_areas.length; i++){
+    			Ext.rangelands.nrt_rehab_areas.push([data.nrt_rehab_areas[i].name, data.nrt_rehab_areas[i].longitude, data.nrt_rehab_areas[i].latitude]);
     		}
+
+
+    		for(var i=0; i < data.nrt_grazing_blocks.length; i++){
+    			Ext.rangelands.nrt_grazing_blocks.push([data.nrt_grazing_blocks[i].name, data.nrt_grazing_blocks[i].longitude, data.nrt_grazing_blocks[i].latitude]);
+    		}
+
+    		for(var i=0; i < data.lewa_blocks.length; i++){
+    			Ext.rangelands.lewa_blocks.push([data.lewa_blocks[i].name, data.lewa_blocks[i].longitude, data.lewa_blocks[i].latitude]);
+    		}
+
+
 
         	
 
@@ -144,7 +153,9 @@ function loadConfig(){
 
 }
 
+
 loadConfig();
+
 
 function drawChart(region, data1){
 
@@ -412,22 +423,27 @@ function highLight(_layer, _name){
 
 	else if( _layer == 'NRT Grazing Blocks'){
 		_layer_name = "nrt_grazing_blocks";
-		property_name = 'grazingblo';
+		property_name = 'block';
 	} 
 
 	else if( _layer == 'NRT Rehabilitation Areas'){
 		_layer_name = "nrt_rehab_areas";
-		property_name = 'site_1';
+		property_name = 'block';
 	} 
 
 	else if( _layer == 'LWF Areas'){
 		_layer_name = "lwf_areas";
-		property_name = 'name_96';
+		property_name = 'block';
+	}
+
+	else if( _layer == 'Lewa Blocks'){
+		_layer_name = "lewa_blocks";
+		property_name = 'block';
 	} 
 
 	else {
 		_layer_name = "nrt_conservancies";
-		property_name = 'conservanc';
+		property_name = 'block';
 	}
 
 	sld += '<sld:StyledLayerDescriptor xmlns="http://www.opengis.net/sld" xmlns:sld="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml" version="1.0.0">';
@@ -596,6 +612,10 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 						_property = 'Site_1';
 
 					} else if( _boundarytype == 'LWF Areas'){
+						_vector = "LWF_Areas.shp";
+						_property = 'NAME_96';
+
+					} else if( _boundarytype == 'Lewa Blocks'){
 						_vector = "LWF_Areas.shp";
 						_property = 'NAME_96';
 
@@ -804,6 +824,11 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 					else if(valueField.value == 'LWF Areas'){
 						_store.loadData(Ext.rangelands.lwf_areas);
+						
+					}
+
+					else if(valueField.value == 'Lewa Blocks'){
+						_store.loadData(Ext.rangelands.lewa_blocks);
 						
 					}
 
