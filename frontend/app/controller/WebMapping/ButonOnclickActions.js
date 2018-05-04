@@ -1264,10 +1264,10 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 				{
 					
 					var win = new Ext.Window({
-						width:270,
-						height:130,
+						width:500,
+						height:500,
 						autoScroll:true,
-						title: 'Useful Links',
+						title: 'Metadata',
 						autoLoad:{
 							url:'pages/useful_links.html'
 						}

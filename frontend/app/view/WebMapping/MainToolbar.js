@@ -112,7 +112,7 @@ Ext.define('LandCover.view.WebMapping.MainToolbar',
 						{
 							text: '',
 							cls:'tools_cls', 
-							tooltip: "Useful Links",
+							tooltip: "Metadata",
 							icon: 'assets/images/links.png',
 							enableToggle: true,
 							action: 'useful_links'
