@@ -1279,6 +1279,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 			{
 				click: function ()
 				{
+					/*
 					var win = new Ext.Window
 					({
 						width:500,
@@ -1290,6 +1291,8 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 						}
 					});
 					win.show();
+					*/
+					var win = window.open('http://tools.rcmrd.org/rangelands/docs/help/', '_blank');
 				}
 			},
 			'MapPanel button[action=map_default_map_extent]':
