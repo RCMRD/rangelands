@@ -487,7 +487,7 @@ function highLight(_layer, _name){
 
 var gpTask;
 
-function generate_Map(ndvi_file, shapefile, fieldvalue) 
+function generate_Map(ndvi_file, shapefile, fieldvalue, overlays) 
 		{
 			
 			//var county_or_conservancy_name = fieldvalue;
@@ -497,9 +497,26 @@ function generate_Map(ndvi_file, shapefile, fieldvalue)
 			var normalized_difference_vegetation_index_filename = ndvi_file;
 			//var normalized_difference_vegetation_index_filename = 'ea_20010101.tif';
 
-			var gpTaskUrl = "http://maps.rcmrd.org/arcgis/rest/services/wps/KenyaRangelandMapGenerator/GPServer/Kenya_Rangeland_Map_Generator";
+			// original wps endpoint
+			//var gpTaskUrl = "http://maps.rcmrd.org/arcgis/rest/services/wps/KenyaRangelandMapGenerator/GPServer/Kenya_Rangeland_Map_Generator";
 
-			var gp_Parameters = {"county_or_conservancy_name":county_or_conservancy_name, "gis_shapefile_name":gis_shapefile_name,"normalized_difference_vegetation_index_filename":normalized_difference_vegetation_index_filename};
+			//var gp_Parameters = {"county_or_conservancy_name":county_or_conservancy_name, "gis_shapefile_name":gis_shapefile_name,"normalized_difference_vegetation_index_filename":normalized_difference_vegetation_index_filename};
+
+			// modified wps endpoint
+			var gpTaskUrl = "http://maps.rcmrd.org/arcgis/rest/services/Kenya/Kenya_Rangelands_Map_Generator/GPServer/Kenya_Rangeland_Map_Generator";
+
+			var gp_Parameters = {"county_or_conservancy_name":county_or_conservancy_name, 
+								"gis_shapefile_name":gis_shapefile_name,
+								"normalized_difference_vegetation_index_filename":normalized_difference_vegetation_index_filename, 
+								"invasive_layer_selection": overlays[6],
+								"lakes_layer_selection": overlays[8], 
+								"towns_layer_selection": overlays[5], 
+								"acacia_layer_selection": overlays[3], 
+								"protected_layer_selection": overlays[1], 
+								"surface_layer_selection": overlays[4], 
+								"opuntia_layer_selection": overlays[2], 
+								"ndvi_layer_selection": "true", 
+								"rivers_layer_selection": overlays[7]};
 
 			gpTask = new esri.tasks.Geoprocessor(gpTaskUrl, 
 			{
@@ -625,7 +642,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 						_property = 'Conservanc';
 					}
 
-					var all_layers = [];
+					var overlays = [];
 
 					
 					var map_layers = map.layers;
@@ -634,16 +651,18 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 						if(map_layers[i].isBaseLayer == false){
 							if(map_layers[i].visibility == true){
 
-								all_layers.push(map_layers[i].name);
+								overlays.push("true");
 								//alert(map_layers[i].name);
 
+							} else {
+								overlays.push("false");
 							}
 						}
 					}
 
 					
 
-					generate_Map(ndvi_tif, _vector, _feature);
+					generate_Map(ndvi_tif, _vector, _feature, overlays);
 
 
 					/*
