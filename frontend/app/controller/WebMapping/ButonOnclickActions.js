@@ -13,6 +13,8 @@ Ext.rangelands.lwf_areas = [];
 
 Ext.rangelands.lewa_blocks = [];
 
+Ext.rangelands.wards = [];
+
 Ext.rangelands.boundary = [
     ['Counties', 'County'], 
     ['NRT Conservancies', 'Conservancy'],
@@ -117,6 +119,10 @@ function loadConfig(){
 
     		for(var i=0; i < data.kenya_range_counties.length; i++){
     			Ext.rangelands.counties.push([data.kenya_range_counties[i].name, data.kenya_range_counties[i].longitude, data.kenya_range_counties[i].latitude]);
+    		}
+
+    		for(var i=0; i < data.kenya_wards.length; i++){
+    			Ext.rangelands.wards.push([data.kenya_wards[i].name, data.kenya_wards[i].longitude, data.kenya_wards[i].latitude]);
     		}
     		
     		for(var i=0; i < data.lwf_areas.length; i++){
@@ -387,7 +393,7 @@ function loadLayer(wms_name){
 				
 				map.addLayer(wms_layer);
 
-				map.setLayerIndex(wms_layer, map.layers.length-13);
+				map.setLayerIndex(wms_layer, map.layers.length-14);
 
 				current_wms = wms_name;
 

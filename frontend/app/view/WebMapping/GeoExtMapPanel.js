@@ -1,4 +1,4 @@
-var counties_wms, conservancies_wms, surface_water, lakes, rivers, towns, protected_areas, acacia, opuntia;
+var counties_wms, conservancies_wms, surface_water, lakes, rivers, towns, protected_areas, acacia, opuntia, wards_wms;
 
 Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 {
@@ -98,6 +98,23 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                     "http://tools.rcmrd.org/geoserver/wms",
                     {
                         layers: 'rangelands:counties',
+                        transparent: true,
+                        format: "image/png"
+                    }, {
+                           buffer: 0,
+                            visibility: false,
+                            displayOutsideMaxExtent: true,
+                            displayInLayerSwitcher: true,
+                            isBaseLayer: false,
+                            yx : {'EPSG:4326' : true}
+                    }
+                    
+                );
+
+        wards_wms = new OpenLayers.Layer.WMS("Wards",
+                    "http://tools.rcmrd.org/geoserver/wms",
+                    {
+                        layers: 'rangelands:kenya_wards',
                         transparent: true,
                         format: "image/png"
                     }, {
@@ -289,7 +306,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
 
         //When there is internet use this
-        map.addLayers([ndvi_wms, protected_areas, opuntia, acacia, surface_water, towns, invasive_species, rivers, lakes, conservancies_wms, counties_wms, 
+        map.addLayers([ndvi_wms, protected_areas, opuntia, acacia, surface_water, towns, invasive_species, rivers, lakes, conservancies_wms, wards_wms, counties_wms, 
             esri_topo_map, mapbox_street]);
 
         
