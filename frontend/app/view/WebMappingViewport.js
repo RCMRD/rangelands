@@ -761,7 +761,7 @@ WestPanel = new Ext.Panel({
     //  hideCollapseTool: true,
     split: true,
     items: [
-        GeneralTabs, LogoPanel
+        GeneralTabs//, LogoPanel
     ],
     listeners: {
         collapse: function() {
