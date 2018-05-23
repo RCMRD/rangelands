@@ -509,7 +509,8 @@ function generate_Map(ndvi_file, shapefile, fieldvalue, overlays)
 			//var gp_Parameters = {"county_or_conservancy_name":county_or_conservancy_name, "gis_shapefile_name":gis_shapefile_name,"normalized_difference_vegetation_index_filename":normalized_difference_vegetation_index_filename};
 
 			// modified wps endpoint
-			var gpTaskUrl = "http://maps.rcmrd.org/arcgis/rest/services/Kenya/Kenya_Rangelands_Map_Generator/GPServer/Kenya_Rangeland_Map_Generator";
+			//var gpTaskUrl = "http://maps.rcmrd.org/arcgis/rest/services/Kenya/Kenya_Rangelands_Map_Generator/GPServer/Kenya_Rangeland_Map_Generator";
+			var gpTaskUrl = "http://maps.rcmrd.org/arcgis/rest/services/wps/KenyaRangelandMapGenerator/GPServer/Kenya_Rangeland_Map_Generator";
 
 			var gp_Parameters = {"county_or_conservancy_name":county_or_conservancy_name, 
 								"gis_shapefile_name":gis_shapefile_name,
