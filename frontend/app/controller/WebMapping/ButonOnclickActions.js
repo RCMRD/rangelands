@@ -445,6 +445,8 @@ function highLight(_layer, _name){
 	else if( _layer == 'Lewa Blocks'){
 		_layer_name = "lewa_blocks";
 		property_name = 'block';
+
+		//alert(property_name);
 	} 
 
 	else {
@@ -640,8 +642,8 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 						_property = 'NAME_96';
 
 					} else if( _boundarytype == 'Lewa Blocks'){
-						_vector = "LWF_Areas.shp";
-						_property = 'NAME_96';
+						_vector = "Lewa_Gb.shp";
+						_property = 'Block';
 
 					}
 					else {
@@ -789,6 +791,26 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 	                            	new OpenLayers.LonLat(Ext.rangelands.lwf_areas[i][1], Ext.rangelands.lwf_areas[i][2]).transform(
 	                                	new OpenLayers.Projection("EPSG:4326"),
 	                                	map.getProjectionObject() ), 12);
+
+
+								highLight(boundarytype, _boundary);
+
+							
+							}
+						}
+						
+					}
+
+
+					else if(boundarytype == 'Lewa Blocks'){
+						
+						for(var i=0; i < Ext.rangelands.lewa_blocks.length; i++){
+							if(Ext.rangelands.lewa_blocks[i][0] == _boundary){
+								
+								map.setCenter(
+	                            	new OpenLayers.LonLat(Ext.rangelands.lewa_blocks[i][1], Ext.rangelands.lewa_blocks[i][2]).transform(
+	                                	new OpenLayers.Projection("EPSG:4326"),
+	                                	map.getProjectionObject() ), 15);
 
 
 								highLight(boundarytype, _boundary);
