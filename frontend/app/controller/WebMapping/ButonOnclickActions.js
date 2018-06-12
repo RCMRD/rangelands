@@ -117,12 +117,12 @@ function loadConfig(){
     	success: function(data){
 
 
-    		for(var i=0; i < data.kenya_range_counties.length; i++){
-    			Ext.rangelands.counties.push([data.kenya_range_counties[i].name, data.kenya_range_counties[i].longitude, data.kenya_range_counties[i].latitude]);
+    		for(var i=0; i < data.counties.length; i++){
+    			Ext.rangelands.counties.push([data.counties[i].name, data.counties[i].longitude, data.counties[i].latitude]);
     		}
 
     		for(var i=0; i < data.kenya_wards.length; i++){
-    			Ext.rangelands.wards.push([data.kenya_wards[i].name, data.kenya_wards[i].longitude, data.kenya_wards[i].latitude]);
+    			Ext.rangelands.wards.push([data.kenya_wards[i].name, data.kenya_wards[i].county, data.kenya_wards[i].longitude, data.kenya_wards[i].latitude]);
     		}
     		
     		for(var i=0; i < data.lwf_areas.length; i++){
@@ -422,36 +422,41 @@ function highLight(_layer, _name){
 	var _layer_name, property_name, selected_wms;
 	var sld = '';
 
+	property_name = 'block';
+
 	if( _layer == 'County'){
 		_layer_name = "counties";
-		property_name = 'county';
+		
 	} 
 
 	else if( _layer == 'NRT Grazing Blocks'){
 		_layer_name = "nrt_grazing_blocks";
-		property_name = 'block';
+		
 	} 
 
 	else if( _layer == 'NRT Rehabilitation Areas'){
 		_layer_name = "nrt_rehab_areas";
-		property_name = 'block';
+		
 	} 
 
 	else if( _layer == 'LWF Areas'){
 		_layer_name = "lwf_areas";
-		property_name = 'block';
+		
 	}
 
 	else if( _layer == 'Lewa Blocks'){
 		_layer_name = "lewa_blocks";
-		property_name = 'block';
+		
+	} 
 
-		//alert(property_name);
+	else if( _layer == 'Wards'){
+		_layer_name = "kenya_wards";
+		
 	} 
 
 	else {
 		_layer_name = "nrt_conservancies";
-		property_name = 'block';
+		
 	}
 
 	sld += '<sld:StyledLayerDescriptor xmlns="http://www.opengis.net/sld" xmlns:sld="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml" version="1.0.0">';
@@ -740,6 +745,34 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 								highLight(boundarytype, _boundary);
 
+								var _ward = Ext.getCmp('ward');
+								_ward.enable();
+								_ward.clearValue();
+
+								var _wardstore = _ward.getStore();
+								_wardstore.removeAll();
+
+
+								var county_wards = [];
+
+								for(var j=0; j < Ext.rangelands.wards.length; j++){
+									if(Ext.rangelands.wards[j][1] == _boundary.toUpperCase()){
+										//alert(Ext.rangelands.wards[j][1]);
+										county_wards.push([Ext.rangelands.wards[j][0],
+											Ext.rangelands.wards[j][1],
+											Ext.rangelands.wards[j][2],
+											Ext.rangelands.wards[j][3]
+											]);
+									}
+								}
+
+								
+
+								_wardstore.loadData(county_wards);
+
+								//alert(county_wards[0]);
+
+
 							
 							}
 						}
@@ -862,32 +895,57 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 					} else if(valueField.value == 'NRT Grazing Blocks'){
 						_store.loadData(Ext.rangelands.nrt_grazing_blocks);
+						Ext.getCmp('ward').disable();
 
 					}
 
 					else if(valueField.value == 'NRT Rehabilitation Areas'){
 						_store.loadData(Ext.rangelands.nrt_rehab_areas);
+						Ext.getCmp('ward').disable();
 						
 					}
 
 					else if(valueField.value == 'LWF Areas'){
 						_store.loadData(Ext.rangelands.lwf_areas);
+						Ext.getCmp('ward').disable();
 						
 					}
 
 					else if(valueField.value == 'Lewa Blocks'){
 						_store.loadData(Ext.rangelands.lewa_blocks);
+						Ext.getCmp('ward').disable();
 						
 					}
 
 					else {
 								
 						_store.loadData(Ext.rangelands.conservancies);
+						Ext.getCmp('ward').disable();
 					}
 					
 					_name.enable();
 				}
-			},   
+			}, 
+
+			'WebMappingViewport combobox[name=ward]': {
+				select:function(valueField){
+					var _selected_ward = valueField.value;
+
+					for(var i=0; i < Ext.rangelands.wards.length; i++){
+						if(Ext.rangelands.wards[i][0] == _selected_ward){
+							map.setCenter(
+	                            	new OpenLayers.LonLat(Ext.rangelands.wards[i][2], Ext.rangelands.wards[i][3]).transform(
+	                                	new OpenLayers.Projection("EPSG:4326"),
+	                                	map.getProjectionObject() ), 10);
+
+							highLight('Wards', _selected_ward);
+						}
+					}
+
+				}
+
+			},
+
 			'WebMappingViewport combobox[name=ndvi_month1]': {
 				select:function(valueField) {
 

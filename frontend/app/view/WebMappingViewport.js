@@ -585,6 +585,29 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
                         }
                     }
                 },
+
+                {
+                    xtype: 'combobox',
+                    fieldLabel: 'Ward',
+                    name: 'ward',
+                    width: 300,
+                    disabled: true,
+                    id: 'ward',
+                    store: Ext.create('Ext.data.ArrayStore', {
+                        fields: ['_value', 'county', 'longitude', 'latitude'],
+                        data : Ext.rangelands.wards 
+                    }),
+                    valueField: '_value',
+                    displayField: '_value',
+                    typeAhead: true,
+                    queryMode: 'local',
+                    emptyText: 'Select...',
+                    listeners:{
+                        'select': function(valueField){
+                            
+                        }
+                    }
+                },
                 {
                     html: '<br />To generate a map from selected indicators, select a county or conservancy boundary then select additional information from Overlays and click on <b>Produce Map</b>. A link to download the generated map will appear under <b>Download NDVI Map</b> which when clicked will download the map in PDF format'
   
