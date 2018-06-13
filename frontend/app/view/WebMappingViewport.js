@@ -595,7 +595,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
                     id: 'ward',
                     store: Ext.create('Ext.data.ArrayStore', {
                         fields: ['_value', 'county', 'longitude', 'latitude'],
-                        data : Ext.rangelands.wards 
+                        data : Ext.rangelands.wards2 
                     }),
                     valueField: '_value',
                     displayField: '_value',

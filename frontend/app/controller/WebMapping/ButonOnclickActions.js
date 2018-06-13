@@ -14,6 +14,7 @@ Ext.rangelands.lwf_areas = [];
 Ext.rangelands.lewa_blocks = [];
 
 Ext.rangelands.wards = [];
+Ext.rangelands.wards2 = [];
 
 Ext.rangelands.boundary = [
     ['Counties', 'County'], 
@@ -628,33 +629,45 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 					var _vector_, _property;
 					var _boundarytype = Ext.getCmp('boundarytype').getValue();
 					var _feature = Ext.getCmp('county').getValue();
+					var _ward = Ext.getCmp('ward').getValue();
+
+					//alert(_ward);
+
+					if(_ward == null){
+
+						if( _boundarytype == 'County'){
+							_vector = "Kenya_Counties.shp";
+							_property = 'NAME';
+
+						} else if( _boundarytype == 'NRT Grazing Blocks'){
+							_vector = "NRT_Grazing_Blocks.shp";
+							_property = 'GrazingBlo';
+
+						} else if( _boundarytype == 'NRT Rehabilitation Areas'){
+							_vector = "NRT_Rehab_Areas.shp";
+							_property = 'Site_1';
+
+						} else if( _boundarytype == 'LWF Areas'){
+							_vector = "LWF_Areas.shp";
+							_property = 'NAME_96';
+
+						} else if( _boundarytype == 'Lewa Blocks'){
+							_vector = "Lewa_Gb.shp";
+							_property = 'Block';
+
+						}
+						else {
+							_vector = "NRT_Conservancies.shp";
+							_property = 'Conservanc';
+						}
+
+					} else {
+						_vector = "Kenya_Ward.shp";
+						_property = 'NAME';
+						_feature = _ward;
+					}
+
 					
-
-					if( _boundarytype == 'County'){
-						_vector = "Kenya_Range_Counties.shp";
-						_property = 'county';
-
-					} else if( _boundarytype == 'NRT Grazing Blocks'){
-						_vector = "NRT_Grazing_Blocks.shp";
-						_property = 'GrazingBlo';
-
-					} else if( _boundarytype == 'NRT Rehabilitation Areas'){
-						_vector = "NRT_Rehab_Areas.shp";
-						_property = 'Site_1';
-
-					} else if( _boundarytype == 'LWF Areas'){
-						_vector = "LWF_Areas.shp";
-						_property = 'NAME_96';
-
-					} else if( _boundarytype == 'Lewa Blocks'){
-						_vector = "Lewa_Gb.shp";
-						_property = 'Block';
-
-					}
-					else {
-						_vector = "NRT_Conservancies.shp";
-						_property = 'Conservanc';
-					}
 
 					var overlays = [];
 
@@ -895,24 +908,28 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 					} else if(valueField.value == 'NRT Grazing Blocks'){
 						_store.loadData(Ext.rangelands.nrt_grazing_blocks);
+						Ext.getCmp('ward').clearValue();
 						Ext.getCmp('ward').disable();
 
 					}
 
 					else if(valueField.value == 'NRT Rehabilitation Areas'){
 						_store.loadData(Ext.rangelands.nrt_rehab_areas);
+						Ext.getCmp('ward').clearValue();
 						Ext.getCmp('ward').disable();
 						
 					}
 
 					else if(valueField.value == 'LWF Areas'){
 						_store.loadData(Ext.rangelands.lwf_areas);
+						Ext.getCmp('ward').clearValue();
 						Ext.getCmp('ward').disable();
 						
 					}
 
 					else if(valueField.value == 'Lewa Blocks'){
 						_store.loadData(Ext.rangelands.lewa_blocks);
+						Ext.getCmp('ward').clearValue();
 						Ext.getCmp('ward').disable();
 						
 					}
@@ -920,6 +937,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 					else {
 								
 						_store.loadData(Ext.rangelands.conservancies);
+						Ext.getCmp('ward').clearValue();
 						Ext.getCmp('ward').disable();
 					}
 					
