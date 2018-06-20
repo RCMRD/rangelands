@@ -29,6 +29,10 @@ var countydata = [];
 
 var conservancydata = [];
 
+var stats_yr = '';
+var stats_boundary = '';
+var stats_region = '';
+
 
 Ext.rangelands.years = [
 
@@ -164,7 +168,11 @@ function loadConfig(){
 loadConfig();
 
 
-function drawChart(region, data1){
+
+
+function drawTrend(boundary1, region1, stats1){
+
+	$('#chart_div').empty();
 
     Highcharts.setOptions({
         global: {
@@ -187,20 +195,21 @@ function drawChart(region, data1){
 
                 title:
                 {
-                    text: 'MODIS NDVI (10-day) timeseries for '+region+' County'
+                    text: 'MODIS NDVI timeseries for '+region1+' ' +boundary1
                 },
 
                 xAxis:
                 {
                     tickWidth: 1,
                     gridLineWidth: 1,
-                    type: 'datetime',
+                    title:{text:stats_yr,style:{color:"#4572A7"}},
+                    type: 'category',
                     //categories: [],
-					dateTimeLabelFormats: {
+					/*dateTimeLabelFormats: {
            				day: '%d-%m-%Y'    //ex- 01 Jan 2017
-        			},
+        			},*/
                     labels:{
-						 format: '{value:%d-%m-%Y}'
+						 //format: '{value:%d-%m-%Y}'
                      
                     }
                 },
@@ -209,7 +218,7 @@ function drawChart(region, data1){
 						{
                             labels:{formatter:function(){return this.value+" "},
                             style:{color:"#4572A7"}},
-                            title:{text:"NDVI",style:{color:"#4572A7"}},
+                            title:{text:"NDVI Utilization (%)",style:{color:"#4572A7"}},
 							//min: 2,
 							//max: 309
 							//opposite:!0,
@@ -255,7 +264,7 @@ function drawChart(region, data1){
                 series: [
                     {
                         name: 'MODIS NDVI',
-                        data: data1,
+                        data: stats1,
 						yAxis: 0
                     }
                    
@@ -267,65 +276,41 @@ function drawChart(region, data1){
 
 }
 
-function plotGraph(region){
 
-	//alert('Drawing graph');
-	//dt_timestamp__gte=2015-09-01T03:00&dt_timestamp__lte=2015-10-05T09:00
 
-	var results1 = [];
+function plotStats(boundary_stats, region_stats, year){
 
-	
+	//alert(boundary_stats + ' ' + region_stats + ' ' + year);
+
+	var stats_data = [];
 
 	$.ajax({
-	    type: "GET",
-	    url: 'http://frost.rcmrd.org/timeseries/'+region+'/',
-	    async: false,
-	    dataType: "json",
-	    success: function(data){
+		type: "GET",
+		url: 'http://tools.rcmrd.org/stats/'+boundary_stats+'/'+region_stats+'/'+year+'/',
+		async: false,
+		dataType: "json",
+		success: function(data){
 
-	        //console.log(data.length);
-	       
-	        for(var i = 0; i < data.length; i++){
-	        	var datestamp = data[i].date;
-	        	var year_ = parseInt(datestamp.slice(0,4));
-	        	var month_ = parseInt(datestamp.slice(4,6)) - 1;
-	        	var day_ = parseInt(datestamp.slice(6,8));
+			for(var i = 0; i < data.cropland.length; i++){
+				stats_data.push([
+					data.cropland[i].month, parseFloat(data.cropland[i].mean)
+					]);
+			}
 
-	            var _date = Date.UTC(year_, month_, day_);
-
-				var ndvi = data[i].ndvi;
-
-				//console.log(_date);
-	            
-
-	            results1.push([_date, ndvi]);
-	            
-	        }
-
-	        //console.log(results1);
-	        
-	        drawChart(region, results1);
-
-
-	      
-			var chart_win = new Ext.Window
-					({
-						width:750,
-						height:450,
-						autoScroll:true,
-						title: 'MODIS NDVI Time Series',
-						contentEl: 'chart_div'
-					});
-
-			chart_win.show(); 
+			if(chart_win){
+				
+				chart_win.hide();
+				
+			}
 			
 
-	        
-	       
+			drawTrend(boundary_stats, region_stats, stats_data);
 
-	    }
-	});
 
+			chart_win.show(); 
+
+		}
+	})
 
 }
 
@@ -616,6 +601,17 @@ var splash_win = new Ext.Window
 splash_win.show();
 
 
+var chart_win = new Ext.Window
+					({
+						width:750,
+						height:450,
+						autoScroll:true,
+						title: 'MODIS NDVI Time Series',
+						contentEl: 'chart_div',
+						closeAction: 'hide'
+					}); 
+
+
 Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 	extend: 'Ext.app.Controller',
 	init: function(){
@@ -712,7 +708,9 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 			{
 				click:function() {
 
-					var region = Ext.getCmp('county').getValue();
+					//var boundary = Ext.getCmp('boundarytype').getValue();
+					//var region = Ext.getCmp('county').getValue();
+					
 
 					Ext.MessageBox.show({
 			           msg: 'Plotting timeseries, please wait...',
@@ -727,7 +725,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 					setTimeout(function(){
 
-						plotGraph(region);
+						plotStats(stats_boundary, stats_region, stats_yr);
                 		Ext.MessageBox.hide();
                 		//Ext.example.msg('Done', 'inundation map generated!');
                 		}, 8000);
@@ -736,6 +734,8 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 									
 				}
+
+
 			},
 
 			'WebMappingViewport combobox[name=county]': {
@@ -789,6 +789,10 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 							
 							}
 						}
+
+						stats_boundary = 'county';
+						stats_region = _boundary;
+						Ext.getCmp('graph_button').enable();
 
 					} else if(boundarytype == 'NRT Grazing Blocks'){
 
@@ -884,6 +888,11 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 							}
 						}
 
+						stats_boundary = 'conservancy';
+						stats_region = _boundary;
+						Ext.getCmp('graph_button').enable();
+						
+
 					} 
 
 					// enable button
@@ -905,6 +914,8 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 					if(valueField.value == 'County'){
 
 						_store.loadData(Ext.rangelands.counties);
+
+						
 
 					} else if(valueField.value == 'NRT Grazing Blocks'){
 						_store.loadData(Ext.rangelands.nrt_grazing_blocks);
@@ -949,6 +960,10 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 				select:function(valueField){
 					var _selected_ward = valueField.value;
 
+					stats_boundary = 'ward';
+					stats_region = _selected_ward;
+					Ext.getCmp('graph_button').enable();
+
 					for(var i=0; i < Ext.rangelands.wards.length; i++){
 						if(Ext.rangelands.wards[i][0] == _selected_ward){
 							map.setCenter(
@@ -992,13 +1007,15 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 				}
 			}, 
 			'WebMappingViewport combobox[name=ndvi_year1]': {
-				select:function() {
+				select:function(valueField) {
 					
 					var ndvi_month1 = Ext.getCmp('ndvi_month1');
 					ndvi_month1.enable();
 					ndvi_month1.clearValue();
 
 					Ext.getCmp('ndvi_dekad').clearValue();
+
+					stats_yr = valueField.value;
 
 					
 				}
@@ -1026,10 +1043,12 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 				}
 			},  	
 			'WebMappingViewport combobox[name=ndvi_year]': {
-				select:function() {
+				select:function(valueField) {
 
 					Ext.getCmp('ndvi_month').enable();
 					Ext.getCmp('ndvi_month').clearValue();
+
+					stats_yr = valueField.value;
 					
 				}
 			},  	
@@ -1056,9 +1075,11 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 				}
 			},  	
 			'WebMappingViewport combobox[name=ndvi_year2]': {
-				select:function() {
+				select:function(valueField) {
 					Ext.getCmp('ndvi_season').enable();
 					Ext.getCmp('ndvi_season').clearValue();
+
+					stats_yr = valueField.value;
 				}
 			},  	
 			'WebMappingViewport combobox[name=ndvi_season]': {
@@ -1177,9 +1198,11 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 				}
 			},  		 		
 			'WebMappingViewport combobox[name=std_anomaly_year]': {
-				select:function() {
+				select:function(valueField) {
 					Ext.getCmp('std_anomaly_month').enable();
 					Ext.getCmp('std_anomaly_month').clearValue();
+
+					stats_yr = valueField.value;
 				}
 			},  
 			'WebMappingViewport combobox[name=std_anomaly_month]': {
@@ -1199,9 +1222,11 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 				}
 			},  
 			'WebMappingViewport combobox[name=std_anomaly_year2]': {
-				select:function() {
+				select:function(valueField) {
 					Ext.getCmp('std_anomaly_season').enable();
 					Ext.getCmp('std_anomaly_season').clearValue();
+
+					stats_yr = valueField.value;
 				}
 			},  
 			'WebMappingViewport combobox[name=std_anomaly_season]': {
@@ -1218,9 +1243,11 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 				}
 			},  	
 			'WebMappingViewport combobox[name=abs_anomaly_year]': {
-				select:function() {
+				select:function(valueField) {
 					Ext.getCmp('abs_anomaly_month').enable();
 					Ext.getCmp('abs_anomaly_month').clearValue();
+
+					stats_yr = valueField.value;
 				}
 			},  
 			'WebMappingViewport combobox[name=abs_anomaly_month]': {
@@ -1240,9 +1267,11 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 				}
 			},  	
 			'WebMappingViewport combobox[name=abs_anomaly_year2]': {
-				select:function() {
+				select:function(valueField) {
 					Ext.getCmp('abs_anomaly_season').enable();
 					Ext.getCmp('abs_anomaly_season').clearValue();
+
+					stats_yr = valueField.value;
 				}
 			},  
 			'WebMappingViewport combobox[name=abs_anomaly_season]': {
@@ -1259,9 +1288,11 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 				}
 			},  	
 			'WebMappingViewport combobox[name=vci_year]': {
-				select:function() {
+				select:function(valueField) {
 					Ext.getCmp('vci_month').enable();
 					Ext.getCmp('vci_month').clearValue();
+
+					stats_yr = valueField.value;
 				}
 			},  
 			'WebMappingViewport combobox[name=vci_month]': {
@@ -1281,9 +1312,11 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 				}
 			},  	
 			'WebMappingViewport combobox[name=vci_year2]': {
-				select:function() {
+				select:function(valueField) {
 					Ext.getCmp('vci_season').enable();
 					Ext.getCmp('vci_season').clearValue();
+
+					stats_yr = valueField.value;
 				}
 			},  
 			'WebMappingViewport combobox[name=vci_season]': {

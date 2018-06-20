@@ -656,50 +656,6 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
     });
 
 
-ChartForm = Ext.create('Ext.form.Panel', {
-    height: 150,
-    bodyPadding: 10,
-    id: 'sim_form_id', 
-    //title: 'Basins',
-    items: [
-       
-                {
-                     xtype: 'datefield',
-                     anchor: '100%',
-                     id: 'start_date',
-                     fieldLabel: 'Start Date',
-                     name: 'start_date',
-                     //disabled: true,
-                     format:'Y-m-d',
-                     submitFormat: 'ymd',
-                     submitValue : true,
-                     maxValue: new Date()  // limited to the current date or prior
-                 },{
-                     xtype: 'datefield',
-                     anchor: '100%',
-                     id: 'end_date',
-                     fieldLabel: 'End Date',
-                     name: 'end_date',
-                     //disabled: true,
-                     format:'Y-m-d',
-                     submitFormat: 'ymd',
-                     submitValue : true,
-                     maxValue: new Date()  // limited to the current date or prior
-                 }
-    ],
-    buttons:
-    [
-        {
-            text: 'Plot Graph',
-            id:'graph_button',
-            width: 100,
-            //disabled: true,
-            action: 'updateGraph'
-            //action: 'singleSearchAction'
-        }
-    ]
-});
-
 
     GeoExtPanel = new Ext.Panel ({
         region: 'west',
