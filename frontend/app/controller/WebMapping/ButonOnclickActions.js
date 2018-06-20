@@ -170,7 +170,7 @@ loadConfig();
 
 
 
-function drawTrend(boundary1, region1, stats1){
+function drawTrend(boundary1, region1, cropland, forest, grassland, shrubland, water, settlement, bareland){
 
 	$('#chart_div').empty();
 
@@ -263,9 +263,39 @@ function drawTrend(boundary1, region1, stats1){
                 },
                 series: [
                     {
-                        name: 'MODIS NDVI',
-                        data: stats1,
-						yAxis: 0
+                        name: 'CROPLAND',
+                        data: cropland,
+						//yAxis: 0
+                    },
+                    {
+                        name: 'FOREST',
+                        data: forest,
+						//yAxis: 1
+                    },
+                    {
+                        name: 'GRASSLAND',
+                        data: grassland,
+						//yAxis: 2
+                    },
+                    {
+                        name: 'SHRUBLAND',
+                        data: shrubland,
+						//yAxis: 3
+                    },
+                    {
+                        name: 'WATER',
+                        data: water,
+						//yAxis: 4
+                    },
+                    {
+                        name: 'SETTLEMENT',
+                        data: settlement,
+						//yAxis: 5
+                    },
+                    {
+                        name: 'BARELAND',
+                        data: bareland,
+						//yAxis: 6
                     }
                    
                     
@@ -282,7 +312,14 @@ function plotStats(boundary_stats, region_stats, year){
 
 	//alert(boundary_stats + ' ' + region_stats + ' ' + year);
 
-	var stats_data = [];
+	var cropland_data = [];
+	var forest_data = [];
+	var grassland_data = [];
+	var shrubland_data = [];
+	var water_data = [];
+	var settlement_data = [];
+	var bareland_data = [];
+	
 
 	$.ajax({
 		type: "GET",
@@ -292,10 +329,47 @@ function plotStats(boundary_stats, region_stats, year){
 		success: function(data){
 
 			for(var i = 0; i < data.cropland.length; i++){
-				stats_data.push([
+				cropland_data.push([
 					data.cropland[i].month, parseFloat(data.cropland[i].mean)
 					]);
 			}
+
+			for(var i = 0; i < data.forest.length; i++){
+				forest_data.push([
+					data.forest[i].month, parseFloat(data.forest[i].mean)
+					]);
+			}
+
+			for(var i = 0; i < data.grassland.length; i++){
+				grassland_data.push([
+					data.grassland[i].month, parseFloat(data.grassland[i].mean)
+					]);
+			}
+
+			for(var i = 0; i < data.shrubland.length; i++){
+				shrubland_data.push([
+					data.shrubland[i].month, parseFloat(data.shrubland[i].mean)
+					]);
+			}
+
+			for(var i = 0; i < data.water.length; i++){
+				water_data.push([
+					data.water[i].month, parseFloat(data.water[i].mean)
+					]);
+			}
+
+			for(var i = 0; i < data.settlement.length; i++){
+				settlement_data.push([
+					data.settlement[i].month, parseFloat(data.settlement[i].mean)
+					]);
+			}
+
+			for(var i = 0; i < data.bareland.length; i++){
+				bareland_data.push([
+					data.bareland[i].month, parseFloat(data.bareland[i].mean)
+					]);
+			}
+
 
 			if(chart_win){
 				
@@ -304,7 +378,7 @@ function plotStats(boundary_stats, region_stats, year){
 			}
 			
 
-			drawTrend(boundary_stats, region_stats, stats_data);
+			drawTrend(boundary_stats, region_stats, cropland_data, forest_data, grassland_data, shrubland_data, water_data, settlement_data, bareland_data);
 
 
 			chart_win.show(); 
