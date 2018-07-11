@@ -281,7 +281,7 @@ function drawTrend(boundary1, region1, cropland, forest, grassland, shrubland, w
                         name: 'SHRUBLAND',
                         data: shrubland,
 						//yAxis: 3
-                    },
+                    }/*,
                     {
                         name: 'WATER',
                         data: water,
@@ -298,7 +298,7 @@ function drawTrend(boundary1, region1, cropland, forest, grassland, shrubland, w
 						//yAxis: 6
                     }
                    
-                    
+                    */
                 ]
 
                 
