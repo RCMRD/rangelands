@@ -23,6 +23,6 @@ DATABASES = {
 
 ALLOWED_HOSTS = ['localhost']
 
-GEOSERVER_URL = 'http://apps.rcmrd.org:8080/geoserver'
-GEOSERVER_USER = 'oware'
-GEOSERVER_PASS = 'ow@re'
+GEOSERVER_URL = 'http://localhost:8080/geoserver'
+GEOSERVER_USER = 'admin'
+GEOSERVER_PASS = 'geoserver'

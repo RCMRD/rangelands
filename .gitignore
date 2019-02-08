@@ -1,6 +1,7 @@
 .idea
 docs/_build/
 frontend/docs/
+local_settings.py
 
 # Packages #
 ############
