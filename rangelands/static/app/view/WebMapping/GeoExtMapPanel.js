@@ -1,4 +1,4 @@
-var counties_wms, conservancies_wms, surface_water, lakes, rivers, towns, protected_areas, acacia, opuntia, wards_wms;
+var counties_wms, conservancies_wms, grazing_blocks_wms, surface_water, lakes, rivers, towns, protected_areas, acacia, opuntia, wards_wms;
 
 
 Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
@@ -106,6 +106,25 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                             yx : {'EPSG:4326' : true}
                     }
                     
+
+                );
+
+
+         grazing_blocks_wms = new OpenLayers.Layer.WMS("Grazing Blocks",
+                    "http://tools.rcmrd.org/geoserver/wms",
+                    {
+                        layers: 'rangelands:nrt_grazing_blocks',
+                        transparent: true,
+                        format: "image/png"
+                    }, {
+                           buffer: 0,
+                            visibility: false,
+                            displayOutsideMaxExtent: true,
+                            displayInLayerSwitcher: true,
+                            isBaseLayer: false,
+                            yx : {'EPSG:4326' : true}
+                    }
+
                 );
 
         counties_wms = new OpenLayers.Layer.WMS("Counties",
@@ -320,7 +339,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
 
         //When there is internet use this
-        map.addLayers([ndvi_wms, protected_areas, opuntia, acacia, surface_water, towns, invasive_species, rivers, lakes, conservancies_wms, wards_wms, counties_wms,
+        map.addLayers([ndvi_wms, protected_areas, opuntia, acacia, surface_water, towns, invasive_species, rivers, lakes, grazing_blocks_wms, conservancies_wms, wards_wms, counties_wms,
             esri_topo_map, mapbox_street]);
 
         
