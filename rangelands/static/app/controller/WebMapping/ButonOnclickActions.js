@@ -453,7 +453,7 @@ function loadLayer(wms_name){
 				
 				map.addLayer(wms_layer);
 
-				map.setLayerIndex(wms_layer, map.layers.length-14);
+				map.setLayerIndex(wms_layer, 0);
 
 				current_wms = wms_name;
 
@@ -644,7 +644,8 @@ function generate_Map(ndvi_file, shapefile, fieldvalue, overlays)
 								"surface_layer_selection": overlays[4], 
 								"opuntia_layer_selection": overlays[2], 
 								"ndvi_layer_selection": "true", 
-								"rivers_layer_selection": overlays[7]};
+								"rivers_layer_selection": overlays[7],
+								"grazingblocks_selection": overlays[9]};
 
 			gpTask = new esri.tasks.Geoprocessor(gpTaskUrl, 
 			{
