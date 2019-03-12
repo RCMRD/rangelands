@@ -557,6 +557,60 @@ function highLight(_layer, _name){
 
 }
 
+// add grazing blocks to conservancy
+function addGrazingWms(_name){
+
+	var current_selected = map.getLayersByName("Grazing Blocks");
+	if(current_selected.length != 0){
+		map.removeLayer(current_selected[0]);
+	}
+
+    var selected_wms;
+
+	var _layer_name = 'nrt_grazing_blocks';
+	var property_name = 'conservanc';
+
+    var sld = '';
+
+	sld += '<sld:StyledLayerDescriptor xmlns="http://www.opengis.net/sld" xmlns:sld="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml" version="1.0.0">';
+	sld += '<sld:NamedLayer><sld:Name>rangelands:';
+	sld += _layer_name;
+	sld += '</sld:Name><sld:UserStyle><sld:Name>query</sld:Name><sld:FeatureTypeStyle>'
+	sld += '<sld:Rule>';
+	sld += '<ogc:Filter><ogc:PropertyIsEqualTo><ogc:PropertyName>';
+	sld += property_name;
+	sld += '</ogc:PropertyName><ogc:Literal>';
+	sld += _name;
+	sld += '</ogc:Literal></ogc:PropertyIsEqualTo></ogc:Filter>';
+	sld += '<PolygonSymbolizer><Stroke><CssParameter name="stroke">#39f9ee</CssParameter><CssParameter name="stroke-width">2</CssParameter>';
+	sld += '</Stroke></PolygonSymbolizer></sld:Rule></sld:FeatureTypeStyle></sld:UserStyle></sld:NamedLayer></sld:StyledLayerDescriptor>';
+
+	selected_wms = new OpenLayers.Layer.WMS("Grazing Blocks",
+			"http://tools.rcmrd.org/geoserver/wms",
+			{
+			   layers: 'rangelands:' + _layer_name,
+			   transparent: true,
+			   format: "image/png",
+			   SLD_BODY: sld
+			}, {
+			       //buffer: 0,
+			       visibility: true,
+			       displayOutsideMaxExtent: true,
+			       //displayInLayerSwitcher: false,
+			       isBaseLayer: false,
+			       hover: true,
+			       yx : {'EPSG:4326' : true},
+			       singleTile: true,
+			       tiled: false
+			});
+
+	map.addLayer(selected_wms);
+
+
+
+}
+
+
 
 var gpTask;
 
@@ -832,6 +886,8 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 								highLight(boundarytype, _boundary);
 
+
+
 								var _ward = Ext.getCmp('ward');
 								_ward.enable();
 								_ward.clearValue();
@@ -956,7 +1012,9 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 	                                	new OpenLayers.Projection("EPSG:4326"),
 	                                	map.getProjectionObject() ), 12);
 
+
 								highLight(boundarytype, _boundary);
+
 
 							
 							}
@@ -965,7 +1023,9 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 						stats_boundary = 'conservancy';
 						stats_region = _boundary;
 						Ext.getCmp('graph_button').enable();
-						
+
+
+
 
 					} 
 
