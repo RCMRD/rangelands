@@ -1,4 +1,4 @@
-var counties_wms, conservancies_wms, grazing_blocks_wms, surface_water, lakes, rivers, towns, protected_areas, acacia, opuntia, wards_wms;
+var counties_wms, conservancies_wms, grazing_blocks_wms, water_sources, surface_water, lakes, rivers, towns, protected_areas, acacia, opuntia, wards_wms;
 
 
 Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
@@ -231,7 +231,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                 );
 
 
-        surface_water = new OpenLayers.Layer.WMS("Water Sources",
+        water_sources = new OpenLayers.Layer.WMS("Water Sources",
                     "http://tools.rcmrd.org/geoserver/wms",
                     {
                         layers: 'rangelands:surface_water',
@@ -247,6 +247,13 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                     }
                     
                 );
+
+        /*
+         surface_water = new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                               url: "https://earthengine.googleapis.com/map/224dd330e5e4f0ebee95cbbf3f0bbc8f/{z}/{x}/{y}?token=06b6524888a385e7f2e2b3eb3516ba5d"
+                    })
+              });*/
 
 
         protected_areas = new OpenLayers.Layer.WMS("Protected Areas",
@@ -339,7 +346,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
 
         //When there is internet use this
-        map.addLayers([ndvi_wms, protected_areas, opuntia, acacia, surface_water, towns, invasive_species, rivers, lakes, grazing_blocks_wms, conservancies_wms, wards_wms, counties_wms,
+        map.addLayers([ndvi_wms, protected_areas, opuntia, acacia, water_sources, towns, invasive_species, rivers, lakes, grazing_blocks_wms, conservancies_wms, wards_wms, counties_wms,
             esri_topo_map, mapbox_street]);
 
         
