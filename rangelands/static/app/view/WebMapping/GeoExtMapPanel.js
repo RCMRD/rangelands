@@ -1,4 +1,4 @@
-var counties_wms, conservancies_wms, grazing_blocks_wms, water_sources, surface_water, lakes, rivers, towns, protected_areas, acacia, opuntia, wards_wms;
+var counties_wms, conservancies_wms, grazing_blocks_wms, water_sources, surface_water, lakes, rivers, towns, protected_areas, acacia, opuntia, wards_wms, conflict_areas, migration_routes;
 
 
 Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
@@ -306,6 +306,40 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                     }
                     
                 );
+
+         conflict_areas = new OpenLayers.Layer.WMS("Conflict Areas",
+                    "http://tools.rcmrd.org/geoserver/wms",
+                    {
+                        layers: 'rangelands:conflict_areas',
+                        transparent: true,
+                        format: "image/png"
+                    }, {
+                           buffer: 0,
+                            visibility: false,
+                            displayOutsideMaxExtent: true,
+                            displayInLayerSwitcher: true,
+                            isBaseLayer: false,
+                            yx : {'EPSG:4326' : true}
+                    }
+
+                );
+
+          migration_routes = new OpenLayers.Layer.WMS("Migration Routes",
+                    "http://tools.rcmrd.org/geoserver/wms",
+                    {
+                        layers: 'rangelands:migration_routes',
+                        transparent: true,
+                        format: "image/png"
+                    }, {
+                           buffer: 0,
+                            visibility: false,
+                            displayOutsideMaxExtent: true,
+                            displayInLayerSwitcher: true,
+                            isBaseLayer: false,
+                            yx : {'EPSG:4326' : true}
+                    }
+
+                );
   
 
         var maxExtent = new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
@@ -346,7 +380,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
 
         //When there is internet use this
-        map.addLayers([ndvi_wms, protected_areas, opuntia, acacia, water_sources, towns, invasive_species, rivers, lakes, grazing_blocks_wms, conservancies_wms, wards_wms, counties_wms,
+        map.addLayers([ndvi_wms, migration_routes, conflict_areas, protected_areas, opuntia, acacia, water_sources, towns, invasive_species, rivers, lakes, grazing_blocks_wms, conservancies_wms, wards_wms, counties_wms,
             esri_topo_map, mapbox_street]);
 
         
