@@ -25,7 +25,8 @@ def runBlocks():
 		'nrt_grazing_blocks',
 		'lwf_areas',
 		'counties',
-		'kenya_wards'
+		'kenya_wards',
+		'county_blocks'
 		
 	]
 

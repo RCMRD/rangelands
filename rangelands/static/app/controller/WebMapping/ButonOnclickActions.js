@@ -13,6 +13,8 @@ Ext.rangelands.lwf_areas = [];
 
 Ext.rangelands.lewa_blocks = [];
 
+Ext.rangelands.county_blocks = []
+
 Ext.rangelands.wards = [];
 Ext.rangelands.wards2 = [];
 
@@ -22,7 +24,8 @@ Ext.rangelands.boundary = [
     ['NRT Grazing Blocks', 'NRT Grazing Blocks'],
     ['NRT Rehabilitation Areas', 'NRT Rehabilitation Areas'],
     ['LWF Areas', 'LWF Areas'],
-    ['Lewa Blocks', 'Lewa Blocks']
+    ['Lewa Blocks', 'Lewa Blocks'],
+    ['County Grazing Blocks', 'County Grazing Blocks']
 ];
 
 var countydata = [];
@@ -153,7 +156,9 @@ function loadConfig(){
     			Ext.rangelands.lewa_blocks.push([data.lewa_blocks[i].name, data.lewa_blocks[i].longitude, data.lewa_blocks[i].latitude]);
     		}
 
-
+            for(var i=0; i < data.county_blocks.length; i++){
+                Ext.rangelands.county_blocks.push([data.county_blocks[i].name, data.county_blocks[i].longitude, data.county_blocks[i].latitude]);
+             }
 
         	
 
@@ -186,7 +191,7 @@ function drawTrend(boundary1, region1, cropland, forest, grassland, shrubland, w
                 {
                     text: 'MODIS NDVI',
                     href: 'http://rcmrd.org'
-                },
+               },
 
                 chart: 
                 {
@@ -327,7 +332,7 @@ function plotStats(boundary_stats, region_stats, year){
 		async: false,
 		dataType: "json",
 		success: function(data){
-
+9
 			for(var i = 0; i < data.cropland.length; i++){
 				cropland_data.push([
 					data.cropland[i].month, parseFloat(data.cropland[i].mean)
@@ -512,7 +517,11 @@ function highLight(_layer, _name){
 	else if( _layer == 'Wards'){
 		_layer_name = "kenya_wards";
 		
-	} 
+	}
+
+	else if( _layer == 'County Grazing Blocks'){
+	    _layer_name = 'county_blocks';
+	}
 
 	else {
 		_layer_name = "nrt_conservancies";
@@ -1002,6 +1011,25 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 						
 					}
 
+					else if(boundarytype == 'County Grazing Blocks'){
+
+						for(var i=0; i < Ext.rangelands.county_blocks.length; i++){
+							if(Ext.rangelands.county_blocks[i][0] == _boundary){
+
+								map.setCenter(
+	                            	new OpenLayers.LonLat(Ext.rangelands.county_blocks[i][1], Ext.rangelands.county_blocks[i][2]).transform(
+	                                	new OpenLayers.Projection("EPSG:4326"),
+	                                	map.getProjectionObject() ), 10);
+
+
+								highLight(boundarytype, _boundary);
+
+
+							}
+						}
+
+					}
+
 
 					else {
 
@@ -1078,6 +1106,12 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 						Ext.getCmp('ward').clearValue();
 						Ext.getCmp('ward').disable();
 						
+					}
+
+					else if(valueField.value == 'County Grazing Blocks'){
+					    _store.loadData(Ext.rangelands.county_blocks);
+					    Ext.getCmp('ward').clearValue();
+					    Ext.getCmp('ward').disable();
 					}
 
 					else {
