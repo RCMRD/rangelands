@@ -645,16 +645,18 @@ function generate_Map(ndvi_file, shapefile, fieldvalue, overlays)
 			var gp_Parameters = {"county_or_conservancy_name":county_or_conservancy_name, 
 								"gis_shapefile_name":gis_shapefile_name,
 								"normalized_difference_vegetation_index_filename":normalized_difference_vegetation_index_filename, 
-								"invasive_layer_selection": overlays[6],
-								"lakes_layer_selection": overlays[8], 
-								"towns_layer_selection": overlays[5], 
-								"acacia_layer_selection": overlays[3], 
-								"protected_layer_selection": overlays[1], 
-								"surface_layer_selection": overlays[4], 
-								"opuntia_layer_selection": overlays[2], 
+								"invasive_layer_selection": overlays[8],
+								"lakes_layer_selection": overlays[10],
+								"towns_layer_selection": overlays[7],
+								"acacia_layer_selection": overlays[5],
+								"protected_layer_selection": overlays[3],
+								"surface_layer_selection": overlays[6],
+								"opuntia_layer_selection": overlays[4],
 								"ndvi_layer_selection": "true", 
-								"rivers_layer_selection": overlays[7],
-								"grazingblocks_selection": overlays[9]};
+								"rivers_layer_selection": overlays[9],
+								"grazingblocks_selection": overlays[11],
+								"migration_routes_selection": overlays[1],
+								"conflict_areas_selection": overlays[2]};
 
 			gpTask = new esri.tasks.Geoprocessor(gpTaskUrl, 
 			{
@@ -790,6 +792,13 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 							_property = 'Block';
 
 						}
+
+						} else if( _boundarytype == 'County Grazing Blocks'){
+							_vector = "All_Grazing_Blocks.shp";
+							_property = 'Name_2';
+
+						}
+
 						else {
 							_vector = "NRT_Conservancies.shp";
 							_property = 'Conservanc';
