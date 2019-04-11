@@ -791,8 +791,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 							_vector = "Lewa_Gb.shp";
 							_property = 'Block';
 
-						}
-
+						
 						} else if( _boundarytype == 'County Grazing Blocks'){
 							_vector = "All_Grazing_Blocks.shp";
 							_property = 'Name_2';
