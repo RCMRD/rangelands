@@ -545,7 +545,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
                     fieldLabel: 'Boundary',
                     name: 'boundarytype',
                     disabled: true,
-                    width: 300,
+                    width: 400,
                     id: 'boundarytype',
                     store: Ext.create('Ext.data.ArrayStore', {
                         fields: ['_display','_value'],
@@ -567,7 +567,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
                     xtype: 'combobox',
                     fieldLabel: 'Name',
                     name: 'county',
-                    width: 300,
+                    width: 400,
                     disabled: true,
                     id: 'county',
                     store: Ext.create('Ext.data.ArrayStore', {
@@ -590,7 +590,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
                     xtype: 'combobox',
                     fieldLabel: 'Ward',
                     name: 'ward',
-                    width: 300,
+                    width: 400,
                     disabled: true,
                     id: 'ward',
                     store: Ext.create('Ext.data.ArrayStore', {
