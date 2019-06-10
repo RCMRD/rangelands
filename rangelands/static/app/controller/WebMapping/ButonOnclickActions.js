@@ -1637,6 +1637,14 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 					var win = window.open('http://tools.rcmrd.org/feedback', '_blank');
 				}
 			},
+			'MapPanel button[action=mapgen_app]':
+			{
+				click: function ()
+				{
+
+					var win = window.open('http://apps.rcmrd.org/rangelands/', '_blank');
+				}
+			},
 			'MapPanel button[action=map_default_map_extent]':
 			{
 				click: function() 

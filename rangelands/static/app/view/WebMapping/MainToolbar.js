@@ -101,6 +101,15 @@ Ext.define('LandCover.view.WebMapping.MainToolbar',
 					id:'menubar_id', 
 					items:[
 					    {
+							text: 'Map Generator',
+							cls:'tools_cls',
+							tooltip: "Map Generator",
+							//icon: '/static/assets/images/about.png',
+							enableToggle: true,
+							action: 'mapgen_app'
+						},
+					    '-',
+					    {
 							text: 'Feedback',
 							cls:'tools_cls',
 							tooltip: "User Feedback",
