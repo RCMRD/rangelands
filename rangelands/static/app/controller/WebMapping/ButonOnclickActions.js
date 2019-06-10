@@ -1626,7 +1626,15 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 					});
 					win.show();
 					*/
-					var win = window.open('/docs/help/', '_blank');
+					var win = window.open('http://tools.rcmrd.org/docs/help/index.html', '_blank');
+				}
+			},
+			'MapPanel button[action=feedback]':
+			{
+				click: function ()
+				{
+
+					var win = window.open('http://tools.rcmrd.org/feedback', '_blank');
 				}
 			},
 			'MapPanel button[action=map_default_map_extent]':

@@ -100,6 +100,15 @@ Ext.define('LandCover.view.WebMapping.MainToolbar',
 					height: 33,
 					id:'menubar_id', 
 					items:[
+					    {
+							text: 'Feedback',
+							cls:'tools_cls',
+							tooltip: "User Feedback",
+							//icon: '/static/assets/images/about.png',
+							enableToggle: true,
+							action: 'feedback'
+						},
+					    '-',
 						{
 							text: '',
 							cls:'tools_cls', 
