@@ -340,7 +340,124 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                     }
 
                 );
-  
+
+           // reports symbology
+        var report_select_style = new OpenLayers.Style({graphicYOffset: -24});
+            var report_default_style = new OpenLayers.Style({graphicYOffset: -24});
+
+            var report_style_map = new OpenLayers.StyleMap({
+                'default': report_default_style,
+                'select': report_select_style
+            });
+
+            //Start creating symbology rules
+            var default_report_marker = new OpenLayers.Rule({
+                title: "Report",
+                symbolizer: {
+                    'pointRadius': 12,
+                    'cursor': "pointer",
+                    externalGraphic: "/static/assets/images/markers/snowy.png"
+                    //graphicYOffset: 2
+                }
+            });
+
+            //Start creating symbology rules
+            var selected_report_marker = new OpenLayers.Rule({
+                title: "Reports",
+                symbolizer: {
+                    'pointRadius': 14,
+                    'cursor': "pointer"
+                }
+            });
+
+            report_default_style.addRules([default_report_marker]);
+            report_select_style.addRules([selected_report_marker]);
+
+
+        // Define proxy for getfeatureinfo
+
+        var data_url = "/static/reports.geojson";
+
+
+
+        var reports_layer = new OpenLayers.Layer.Vector("Invasive Species Reports", {
+            isBaseLayer: false, displayInLayerSwitcher: true, visibility: false,
+            styleMap: report_style_map,
+            projection:  new OpenLayers.Projection('EPSG:4326'),
+            //displayProjection: new OpenLayers.Projection("EPSG:4326"),
+            transparent: true,
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.HTTP({
+                url: data_url,
+                format: new OpenLayers.Format.GeoJSON({
+                        extractStyles: true,
+                        extractAttributes: true
+                    })
+            })
+        });
+
+
+        function createPopup(feature) {
+
+                var details = '<div class="popup_output">';
+                details += '<div  class="marker_popup_content">'+
+
+                //'<div class="columnA" ><strong>Source: </strong>'+
+                // feature.attributes.USER+'</div>'+
+                 '<div class="columnA"><strong>Date: </strong>'+
+                 feature.attributes.DATA_TIME+'</div>'+
+                 '<div class="columnA" ><strong>Abundance: </strong>'+
+                 feature.attributes.ABUNDANCE+'</div>'+
+                 '<div class="columnA" ><strong>Infected Area: </strong>'+
+                 feature.attributes.INFECTED_AREA+'</div>'+
+                 '<div class="columnA"><strong>Species: </strong>'+
+                 feature.attributes.SPECIES+'</div>';
+                details += '</div>';
+                details += '</div>';
+
+                var markerPopup = new GeoExt.Popup({
+                    title: 'Invasive Species Report',
+                    height:200,
+                    width: 342,
+                    location: feature,
+                    cls:'popup_cls',
+                    bodyPadding:'6px',
+                    bodyStyle:'background:rgba(228, 225, 213, 0.83);',
+                    html: details,
+                    maximizable: true,
+                    collapsible: true,
+                    anchored: true,
+                    moveable: true,
+                    animCollapse: true,
+                    shadow: true,
+                    listeners: {
+                        maximize: function (){
+                            Ext.select('img.popup_img').setStyle('height',( (Ext.getBody().getViewSize().height*80 ) / 100)+'px');
+                            Ext.select('img.popup_img').setStyle('width', 'auto');
+                            Ext.select('img.popup_img').setStyle('max-height',( (Ext.getBody().getViewSize().height*80 ) / 100)+'px');
+                        },
+                        restore: function (){
+                            Ext.select('img.popup_img').setStyle('width', '100%');
+                            Ext.select('img.popup_img').setStyle('height', 'auto');
+                            Ext.select('img.popup_img').setStyle('max-height', '320px');
+                        }
+                    }
+                });
+
+
+                // unselect feature when the popup
+                // is closed
+                markerPopup.on({
+                    close: function () {
+                        if (OpenLayers.Util.indexOf(reports_layer.selectedFeatures, this.feature) > -1) {
+                            unselect.unselect(reports_layer.selectedFeatures.feature);
+                        }
+                    }
+                });
+                markerPopup.show();
+            }
+
+
 
         var maxExtent = new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
         restrictedExtent = maxExtent.clone();
@@ -380,10 +497,20 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
 
         //When there is internet use this
-        map.addLayers([ndvi_wms, migration_routes, conflict_areas, protected_areas, opuntia, acacia, water_sources, towns, invasive_species, rivers, lakes, grazing_blocks_wms, conservancies_wms, wards_wms, counties_wms,
+        map.addLayers([ndvi_wms, migration_routes, conflict_areas, protected_areas, opuntia, acacia, water_sources, towns, reports_layer, rivers, lakes, grazing_blocks_wms, conservancies_wms, wards_wms, counties_wms,
             esri_topo_map, mapbox_street]);
 
-        
+        reports_layer.events.on({
+                featureselected: function (e) {
+                    createPopup(e.feature);
+                }
+            });
+
+        var select_field_report = new OpenLayers.Control.SelectFeature(
+                reports_layer
+            );
+            map.addControl(select_field_report);
+            select_field_report.activate();
 
 		map.setCenter(new OpenLayers.LonLat(37.833516, 0.259953).transform(
 			new OpenLayers.Projection("EPSG:4326"),

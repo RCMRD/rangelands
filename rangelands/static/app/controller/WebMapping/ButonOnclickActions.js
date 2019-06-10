@@ -1613,19 +1613,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 			{
 				click: function ()
 				{
-					/*
-					var win = new Ext.Window
-					({
-						width:500,
-						height:500,
-						autoScroll:true,
-						title: 'Help',
-						autoLoad:{
-							url:'pages/help.html'
-						}
-					});
-					win.show();
-					*/
+
 					var win = window.open('http://tools.rcmrd.org/docs/help/index.html', '_blank');
 				}
 			},
