@@ -1,7 +1,7 @@
 from geoserver.catalog import Catalog
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 
 from rangelands.gee_utils import getPondMap
 from rangelands.data.models import *
@@ -170,8 +170,9 @@ def statistics(request, boundary, region, year):
 
 	return HttpResponse(json.dumps(stats_data), content_type="application/json")
 
+
 def get_pond_map(request):
 	today = datetime.datetime.now().strftime('%Y-%m-%d')
 	result = getPondMap(today)
 
-	return JsonResponse(result)
+	return HttpResponse(json.dumps(result), content_type="application/json")
