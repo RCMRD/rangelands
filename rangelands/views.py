@@ -1,14 +1,17 @@
 from geoserver.catalog import Catalog
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
+from rangelands.gee_utils import getPondMap
 from rangelands.data.models import *
 from rangelands.data.timeseries import *
 from rangelands.data.centroids import *
 from rangelands import settings
 import json
+import datetime
 import fnmatch
+
 
 def home(request):
 	"""
@@ -24,8 +27,13 @@ def home(request):
 		if fnmatch.fnmatch(layer_name, 'modis.dekadal.2019*'):
 			dekadal.append(layer_name)
 
+	today = datetime.datetime.now().strftime('%Y-%m-%d')
+	result = getPondMap(today)
+
 	context_dict = {
-		'latest_dekadal': max(dekadal)
+		'latest_dekadal': max(dekadal),
+		'pond_mapid':result['mapid'],
+		'pond_token': result['token']
 	}
 
 	return render_to_response('index.html', RequestContext(request, context_dict))
@@ -161,3 +169,9 @@ def statistics(request, boundary, region, year):
 	stats_data = runStats(boundary, region, year)
 
 	return HttpResponse(json.dumps(stats_data), content_type="application/json")
+
+def get_pond_map(request):
+	today = datetime.datetime.now().strftime('%Y-%m-%d')
+	result = getPondMap(today)
+
+	return JsonResponse(result)

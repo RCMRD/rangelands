@@ -26,5 +26,6 @@ urlpatterns = [
 	url(r'^raster/(?P<rasterfile>[^/]*)/$', 'rangelands.views.raster'),
 	url(r'^appconfig/', 'rangelands.views.app_config', name='app_config'),
 	url(r'^latest/', 'rangelands.views.latest_wms', name='latest_wms'),
+	url(r'^surfacewater/', 'rangelands.views.get_pond_map', name='surface_water'),
 
 ]

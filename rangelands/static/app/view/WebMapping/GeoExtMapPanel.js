@@ -247,14 +247,16 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                     }
                     
                 );
-
-        /*
-         surface_water = new ol.layer.Tile({
-                    source: new ol.source.XYZ({
-                               url: "https://earthengine.googleapis.com/map/224dd330e5e4f0ebee95cbbf3f0bbc8f/{z}/{x}/{y}?token=06b6524888a385e7f2e2b3eb3516ba5d"
-                    })
-              });*/
-
+          surface_water = new OpenLayers.Layer.XYZ(
+            "Surface Water","https://earthengine.googleapis.com/map/"+pond_mapid+"/${z}/${x}/${y}?token="+pond_token,
+            {
+                    visibility: true,
+                    isBaseLayer: false,
+                    sphericalMercator: true,
+                    yx : {'EPSG:3857' : true}
+            }
+          );
+          console.log(pond_mapid,pond_token)
 
         protected_areas = new OpenLayers.Layer.WMS("Protected Areas",
                     "http://tools.rcmrd.org/geoserver/wms",
@@ -497,7 +499,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
 
         //When there is internet use this
-        map.addLayers([ndvi_wms, migration_routes, conflict_areas, protected_areas, opuntia, acacia, water_sources, towns, reports_layer, rivers, lakes, grazing_blocks_wms, conservancies_wms, wards_wms, counties_wms,
+        map.addLayers([ndvi_wms, migration_routes, conflict_areas, protected_areas, opuntia, acacia, surface_water, towns, reports_layer, rivers, lakes, grazing_blocks_wms, conservancies_wms, wards_wms, counties_wms,
             esri_topo_map, mapbox_street]);
 
         reports_layer.events.on({

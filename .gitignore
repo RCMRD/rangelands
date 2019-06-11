@@ -23,6 +23,7 @@ rangelands/local_settings.py
 *.log
 *.sql
 *.sqlite
+*.json
 
 # OS generated files #
 ######################
