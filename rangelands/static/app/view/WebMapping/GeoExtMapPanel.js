@@ -27,7 +27,6 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
        
         ///Baselayers
-
         var mapbox_street = new OpenLayers.Layer.XYZ("Mapbox Street",
             ["http://a.tiles.mapbox.com/v4/mapbox.streets/${z}/${x}/${y}.png?access_token=pk.eyJ1Ijoid29uZGllIiwiYSI6InlKcXpXT1UifQ.BQ3hMXdyffGusTRN8JnWOg"], {
                 sphericalMercator: true,
@@ -38,6 +37,10 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
         var esri_topo_map = new OpenLayers.Layer.XYZ( "ESRI",
             "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/${z}/${y}/${x}",
+            {sphericalMercator: true} );
+
+         var esri_imagery = new OpenLayers.Layer.XYZ( "ESRI Imagery",
+            "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}",
             {sphericalMercator: true} );
 
         var mapquest = new OpenLayers.Layer.XYZ(
@@ -256,7 +259,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                     yx : {'EPSG:3857' : true}
             }
           );
-          console.log(pond_mapid,pond_token)
+          //console.log(pond_mapid,pond_token)
 
         protected_areas = new OpenLayers.Layer.WMS("Protected Areas",
                     "http://tools.rcmrd.org/geoserver/wms",
@@ -500,7 +503,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
         //When there is internet use this
         map.addLayers([ndvi_wms, migration_routes, conflict_areas, protected_areas, opuntia, acacia, surface_water, towns, reports_layer, rivers, lakes, grazing_blocks_wms, conservancies_wms, wards_wms, counties_wms,
-            esri_topo_map, mapbox_street]);
+            esri_imagery, mapbox_street]);
 
         reports_layer.events.on({
                 featureselected: function (e) {

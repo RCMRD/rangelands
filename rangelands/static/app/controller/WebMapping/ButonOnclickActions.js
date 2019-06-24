@@ -394,6 +394,70 @@ function plotStats(boundary_stats, region_stats, year){
 }
 
 
+function plotRainfall(){
+
+	// submit data request
+
+	var data_request_url = "https://climateserv.servirglobal.net/chirps/submitDataRequest/?datatype=32&begintime=01/01/2018&endtime=02/29/2018&intervaltype=0&operationtype=5&callback=successCallback&dateType_Category=default&isZip_CurrentDataType=false&layerid=admin_2_af&featureids=4642";
+
+	$.ajax({
+		type: "GET",
+		url: data_request_url,
+		async: false,
+		dataType: "jsonp",
+		crossDomain: true,
+		success: function(data){
+
+
+
+		    console.log(data);
+
+            /*
+		    $.ajax({
+		        type: "GET",
+                url: climateserve_url,
+                async: false,
+                dataType: "jsonp",
+                crossDomain: true,
+                success: function(data){
+
+                    console.log(data);
+
+
+                }
+
+		    });
+
+            */
+
+			/*
+			if(rain_win){
+
+				rain_win.hide();
+
+			}
+
+
+			drawRain();
+
+			rain_win.show();
+
+			*/
+
+		}
+	});
+
+
+
+	// get progress
+
+	// get rain data
+
+
+
+}
+
+
 dojo.require("esri.tasks.gp");
 
 var _county;
@@ -749,7 +813,17 @@ var chart_win = new Ext.Window
 						title: 'MODIS NDVI Time Series',
 						contentEl: 'chart_div',
 						closeAction: 'hide'
-					}); 
+					});
+
+var rain_win = new Ext.Window
+					({
+						width:750,
+						height:450,
+						autoScroll:true,
+						title: 'Rainfall(mm)',
+						contentEl: 'chart_div',
+						closeAction: 'hide'
+					});
 
 
 Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
@@ -879,6 +953,40 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 					
 
 									
+				}
+
+
+			},
+			'WebMappingViewport button[action=rainGraph]':
+			{
+				click:function() {
+
+					//var boundary = Ext.getCmp('boundarytype').getValue();
+					//var region = Ext.getCmp('county').getValue();
+
+
+					Ext.MessageBox.show({
+			           msg: 'Plotting rainfall, please wait...',
+			           //progressText: 'Processing...',
+			           width:300,
+			           wait:true,
+			           //waitConfig: {interval:200},
+			           icon:'ext-mb-download', //custom class in msg-box.html
+			           iconHeight: 50
+			           //animateTarget: 'mb7'
+			       });
+
+					setTimeout(function(){
+
+						plotRainfall();
+                		Ext.MessageBox.hide();
+                		//Ext.example.msg('Done', 'inundation map generated!');
+                		}, 8000);
+
+
+					//rain_win.show()
+
+
 				}
 
 
