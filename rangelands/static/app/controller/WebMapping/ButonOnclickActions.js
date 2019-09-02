@@ -412,37 +412,7 @@ function plotRainfall(){
 
 		    console.log(data);
 
-            /*
-		    $.ajax({
-		        type: "GET",
-                url: climateserve_url,
-                async: false,
-                dataType: "jsonp",
-                crossDomain: true,
-                success: function(data){
 
-                    console.log(data);
-
-
-                }
-
-		    });
-
-            */
-
-			/*
-			if(rain_win){
-
-				rain_win.hide();
-
-			}
-
-
-			drawRain();
-
-			rain_win.show();
-
-			*/
 
 		}
 	});
