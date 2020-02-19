@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+admin.site.site_header = 'RDST Dashboard'
 
 urlpatterns = [
 	url(r'^$', 'rangelands.views.home', name='home'),

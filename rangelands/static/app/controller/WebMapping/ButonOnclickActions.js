@@ -40,6 +40,7 @@ var stats_region = '';
 Ext.rangelands.years = [
 
     ['2019'],
+    ['2020'],
     ['2018'],
     ['2017'],
     ['2016'],

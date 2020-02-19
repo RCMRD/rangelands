@@ -3,6 +3,7 @@ docs/_build/
 frontend/docs/
 local_settings.py
 rangelands/local_settings.py
+*.pyc
 
 # Packages #
 ############
