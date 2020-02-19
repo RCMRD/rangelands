@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.contrib import admin
 
 admin.site.site_header = 'RDST Dashboard'
@@ -28,5 +28,7 @@ urlpatterns = [
 	url(r'^appconfig/', 'rangelands.views.app_config', name='app_config'),
 	url(r'^latest/', 'rangelands.views.latest_wms', name='latest_wms'),
 	url(r'^surfacewater/', 'rangelands.views.get_pond_map', name='surface_water'),
+	url(r'^', include('django.contrib.auth.urls')),
+	url(r'^admin/', include(admin.site.urls)),
 
 ]

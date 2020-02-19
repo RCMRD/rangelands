@@ -7,6 +7,7 @@ Ext.define('LandCover.view.WebMapping.MainToolbar',
     initComponent: function() 
 	{
         var me = this;
+        //var xx = "login";
         Ext.applyIf(me, {
             items: 
 			[           
@@ -116,6 +117,15 @@ Ext.define('LandCover.view.WebMapping.MainToolbar',
 							//icon: '/static/assets/images/about.png',
 							enableToggle: true,
 							action: 'feedback'
+						},
+						'-',
+					    {
+							text: username,
+							cls:'tools_cls',
+							tooltip: "User Login",
+							//icon: '/static/assets/images/about.png',
+							enableToggle: true,
+							action: 'login'
 						},
 					    '-',
 						{

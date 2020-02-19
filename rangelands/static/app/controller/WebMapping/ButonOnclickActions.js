@@ -39,8 +39,8 @@ var stats_region = '';
 
 Ext.rangelands.years = [
 
-    ['2019'],
     ['2020'],
+    ['2019'],
     ['2018'],
     ['2017'],
     ['2016'],
@@ -1702,6 +1702,14 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 				{
 
 					var win = window.open('http://tools.rcmrd.org/feedback', '_blank');
+				}
+			},
+			'MapPanel button[action=login]':
+			{
+				click: function ()
+				{
+
+					window.location.href = "/login";
 				}
 			},
 			'MapPanel button[action=mapgen_app]':
