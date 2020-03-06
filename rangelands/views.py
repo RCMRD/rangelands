@@ -24,7 +24,7 @@ def home(request):
 	dekadal = []
 	for layer in all_layers:
 		layer_name = layer.name
-		if fnmatch.fnmatch(layer_name, 'modis.dekadal.2019*'):
+		if fnmatch.fnmatch(layer_name, 'modis.dekadal.2020*'):
 			dekadal.append(layer_name)
 
 	today = datetime.datetime.now().strftime('%Y-%m-%d')
