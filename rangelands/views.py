@@ -24,7 +24,8 @@ def home(request):
 	dekadal = []
 	for layer in all_layers:
 		layer_name = layer.name
-		if fnmatch.fnmatch(layer_name, 'modis.dekadal.2020*'):
+		if fnmatch.fnmatch(layer_name, '*modis.dekadal.2020*'):
+			layer_name = layer_name.replace("rangelands:","")
 			dekadal.append(layer_name)
 
 	today = datetime.datetime.now().strftime('%Y-%m-%d')
