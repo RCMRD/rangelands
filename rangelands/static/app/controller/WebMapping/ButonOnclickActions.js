@@ -577,7 +577,7 @@ function highLight(_layer, _name){
 	sld += '</Stroke></PolygonSymbolizer></sld:Rule></sld:FeatureTypeStyle></sld:UserStyle></sld:NamedLayer></sld:StyledLayerDescriptor>';
 
 	selected_wms = new OpenLayers.Layer.WMS("Selected Boundary",
-			"http://tools.rcmrd.org/geoserver/wms",
+			"http://apps.rcmrd.org:8080/geoserver/wms",
 			{
 			   layers: 'rangelands:' + _layer_name,
 			   transparent: true,
@@ -630,7 +630,7 @@ function addGrazingWms(_name){
 	sld += '</Stroke></PolygonSymbolizer></sld:Rule></sld:FeatureTypeStyle></sld:UserStyle></sld:NamedLayer></sld:StyledLayerDescriptor>';
 
 	selected_wms = new OpenLayers.Layer.WMS("Grazing Blocks",
-			"http://tools.rcmrd.org/geoserver/wms",
+			"http://apps.rcmrd.org:8080/geoserver/wms",
 			{
 			   layers: 'rangelands:' + _layer_name,
 			   transparent: true,

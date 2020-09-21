@@ -95,7 +95,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
 
         conservancies_wms = new OpenLayers.Layer.WMS("Conservancies",
-                    "http://tools.rcmrd.org/geoserver/wms",
+                    "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
                         layers: 'rangelands:conservancies',
                         transparent: true,
@@ -114,7 +114,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
 
          grazing_blocks_wms = new OpenLayers.Layer.WMS("Grazing Blocks",
-                    "http://tools.rcmrd.org/geoserver/wms",
+                    "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
                         layers: 'rangelands:nrt_grazing_blocks',
                         transparent: true,
@@ -131,7 +131,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                 );
 
         counties_wms = new OpenLayers.Layer.WMS("Counties",
-                    "http://tools.rcmrd.org/geoserver/wms",
+                    "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
                         layers: 'rangelands:counties',
                         transparent: true,
@@ -148,7 +148,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                 );
 
         wards_wms = new OpenLayers.Layer.WMS("Wards",
-                    "http://tools.rcmrd.org/geoserver/wms",
+                    "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
                         layers: 'rangelands:kenya_wards',
                         transparent: true,
@@ -166,7 +166,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
     
 
         invasive_species = new OpenLayers.Layer.WMS("Invasive Species",
-                    "http://tools.rcmrd.org/geoserver/wms",
+                    "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
                         layers: 'rangelands:invasive_species',
                         transparent: true,
@@ -183,14 +183,14 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                 );
 
         lakes = new OpenLayers.Layer.WMS("Lakes",
-                    "http://tools.rcmrd.org/geoserver/wms",
+                    "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
                         layers: 'rangelands:lakes',
                         transparent: true,
                         format: "image/png"
                     }, {
                            buffer: 0,
-                            visibility: true,
+                            visibility: false,
                             displayOutsideMaxExtent: true,
                             displayInLayerSwitcher: true,
                             isBaseLayer: false,
@@ -200,7 +200,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                 );
         
         rivers = new OpenLayers.Layer.WMS("Rivers",
-                    "http://tools.rcmrd.org/geoserver/wms",
+                    "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
                         layers: 'rangelands:rivers',
                         transparent: true,
@@ -217,7 +217,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                 );
 
         towns = new OpenLayers.Layer.WMS("Towns",
-                    "http://tools.rcmrd.org/geoserver/wms",
+                    "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
                         layers: 'rangelands:towns',
                         transparent: true,
@@ -235,7 +235,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
 
         water_sources = new OpenLayers.Layer.WMS("Water Sources",
-                    "http://tools.rcmrd.org/geoserver/wms",
+                    "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
                         layers: 'rangelands:surface_water',
                         transparent: true,
@@ -262,7 +262,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
           //console.log(pond_mapid,pond_token)
 
         protected_areas = new OpenLayers.Layer.WMS("Protected Areas",
-                    "http://tools.rcmrd.org/geoserver/wms",
+                    "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
                         layers: 'rangelands:protected_areas',
                         transparent: true,
@@ -279,7 +279,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                 );
 
         opuntia = new OpenLayers.Layer.WMS("Opuntia Occurence",
-                    "http://tools.rcmrd.org/geoserver/wms",
+                    "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
                         layers: 'rangelands:opuntia_occurence',
                         transparent: true,
@@ -296,7 +296,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                 );
 
         acacia = new OpenLayers.Layer.WMS("Acacia Reficiens Occurence",
-                    "http://tools.rcmrd.org/geoserver/wms",
+                    "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
                         layers: 'rangelands:acacia_occurence',
                         transparent: true,
@@ -313,7 +313,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                 );
 
          conflict_areas = new OpenLayers.Layer.WMS("Conflict Areas",
-                    "http://tools.rcmrd.org/geoserver/wms",
+                    "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
                         layers: 'rangelands:conflict_areas',
                         transparent: true,
@@ -330,7 +330,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                 );
 
           migration_routes = new OpenLayers.Layer.WMS("Migration Routes",
-                    "http://tools.rcmrd.org/geoserver/wms",
+                    "http://apps.rcmrd.org:8080/geoserver/wms",
                     {
                         layers: 'rangelands:migration_routes',
                         transparent: true,

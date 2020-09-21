@@ -619,7 +619,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
             text: 'Rainfall',
             id:'rain_button',
             width: 100,
-            //disabled: true,
+            disabled: true,
             action: 'rainGraph'
 
         },
