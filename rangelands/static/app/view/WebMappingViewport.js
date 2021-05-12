@@ -524,6 +524,44 @@ VCIForm = Ext.create('Ext.form.Panel', {
                     queryMode: 'local',
                     emptyText: 'Select season...'
                 }]
+            },{
+                title: 'VCI Moving Average',
+                id: 'vci_moving',
+                defaultType: 'textfield',
+                defaults: {
+                    anchor: '100%'
+                },
+                items: [{
+                    xtype: 'combobox',
+                    fieldLabel: 'Year',
+                    //disabled: true,
+                    name: 'vci_year3',
+                    id: 'vci_year3',
+                    store: Ext.create('Ext.data.ArrayStore', {
+                        fields: ['_value'],
+                        data : Ext.rangelands.years
+                    }),
+                    valueField: '_value',
+                    displayField: '_value',
+                    typeAhead: true,
+                    queryMode: 'local',
+                    emptyText: 'Select year...'
+                },{
+                    xtype: 'combobox',
+                    fieldLabel: 'Month',
+                    disabled: true,
+                    name: 'vci_month3',
+                    id: 'vci_month3',
+                    store: Ext.create('Ext.data.ArrayStore', {
+                        fields: ['_display','_value'],
+                        data : Ext.rangelands.months
+                    }),
+                    valueField: '_value',
+                    displayField: '_display',
+                    typeAhead: true,
+                    queryMode: 'local',
+                    emptyText: 'Select month...'
+                }]
             }]
 
     },{

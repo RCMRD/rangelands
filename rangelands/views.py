@@ -17,7 +17,7 @@ def home(request):
 	"""
 		Return latest modis dekadal wms layer
 	"""
-	"""
+
 	geoserver_api = settings.GEOSERVER_URL + '/rest'
 	cat = Catalog(geoserver_api, settings.GEOSERVER_USER, settings.GEOSERVER_PASS)
 
@@ -25,16 +25,16 @@ def home(request):
 	dekadal = []
 	for layer in all_layers:
 		layer_name = layer.name
-		if fnmatch.fnmatch(layer_name, '*modis.dekadal.2020*'):
+		if fnmatch.fnmatch(layer_name, '*modis.dekadal.2021*'):
 			layer_name = layer_name.replace("rangelands:","")
 			dekadal.append(layer_name)
 
 	today = datetime.datetime.now().strftime('%Y-%m-%d')
 	#result = getPondMap(today)
-	"""
+
 	context_dict = {
-		#'latest_dekadal': max(dekadal)
-		'latest_dekadal': 'modis.dekadal.20201001.tif'
+		'latest_dekadal': max(dekadal)
+		#'latest_dekadal': 'modis.dekadal.20201001.tif'
 		#'pond_mapid':result['mapid'],
 		#'pond_token': result['token']
 	}

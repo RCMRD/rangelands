@@ -76,7 +76,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
 
         ndvi_wms = new OpenLayers.Layer.WMS(default_wms,
-                    "http://apps.rcmrd.org:8080/geoserver/wms",
+                    "https://maps.rcmrd.org/geoserver/wms",
                     {
                         layers: default_wms_layer,
                         transparent: true,

@@ -477,7 +477,7 @@ function loadLayer(wms_name){
 				}
 
 				var wms_layer = new OpenLayers.Layer.WMS(wms_name,
-						"http://apps.rcmrd.org:8080/geoserver/wms",
+						"https://maps.rcmrd.org/geoserver/wms",
 						{
 						   layers: 'rangelands:' + wms_name,
 						   transparent: true,
@@ -1597,7 +1597,15 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 					stats_yr = valueField.value;
 				}
-			},  
+			},
+			'WebMappingViewport combobox[name=vci_year3]': {
+				select:function(valueField) {
+					Ext.getCmp('vci_month3').enable();
+					Ext.getCmp('vci_month3').clearValue();
+
+					stats_yr = valueField.value;
+				}
+			},
 			'WebMappingViewport combobox[name=vci_month]': {
 				select:function() {
 
@@ -1613,7 +1621,27 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 					Ext.getCmp('boundarytype').enable();
 					
 				}
-			},  	
+			},
+			'WebMappingViewport combobox[name=vci_month3]': {
+				select:function() {
+
+					//get selected year and month
+					var sel_year = Ext.getCmp('vci_year3').getValue();
+					var sel_month = Ext.getCmp('vci_month3').getValue();
+					var suf_month = sel_month - 2;
+					if(sel_month < 10){
+						sel_month = '0' + sel_month;
+					}
+					if(suf_month < 10){
+						suf_month = '0' + suf_month;
+					}
+					var monthly_layer = 'modis.moving.average.VCI.' + sel_year + sel_month + '.' + sel_year + suf_month + '.tif';
+					loadLayer(monthly_layer);
+					ndvi_tif = monthly_layer;
+					Ext.getCmp('boundarytype').enable();
+
+				}
+			},
 			'WebMappingViewport combobox[name=vci_year2]': {
 				select:function(valueField) {
 					Ext.getCmp('vci_season').enable();
