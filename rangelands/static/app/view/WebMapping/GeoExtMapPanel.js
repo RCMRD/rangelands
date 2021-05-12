@@ -253,7 +253,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
           surface_water = new OpenLayers.Layer.XYZ(
             "Surface Water","https://earthengine.googleapis.com/map/"+pond_mapid+"/${z}/${x}/${y}?token="+pond_token,
             {
-                    visibility: true,
+                    visibility: false,
                     isBaseLayer: false,
                     sphericalMercator: true,
                     yx : {'EPSG:3857' : true}

@@ -615,7 +615,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
 
     ],
     buttons:
-	[   {
+	[ /*  {
             text: 'Rainfall',
             id:'rain_button',
             width: 100,
@@ -623,6 +623,14 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
             action: 'rainGraph'
 
         },
+	{
+            text: 'VCI Products',
+            id:'vci_button',
+            width: 100,
+            disabled: true,
+            action: 'vciWindow'
+
+        },*/
 	    {
             text: 'Time Series',
             id:'graph_button',
@@ -658,6 +666,27 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
         columns: [
             {text: "Download NDVI Map", width: 400, dataIndex: 'label1'}
             
+            
+        ]
+
+    });
+
+   var vci_downstore = Ext.create('Ext.data.Store', {
+    model: 'Download',
+    data: [
+        //{label1: 'NDVI Map'}
+
+    ]
+
+   });
+
+    var vci_downloads = Ext.create('Ext.grid.Panel', {
+        store: vci_downstore,
+        id: 'vci_downgrid',
+        //title: 'Downloads',
+        columns: [
+            {text: "Download VCI Products", width: 400, dataIndex: 'label1'}
+
             
         ]
 
@@ -714,7 +743,7 @@ var GeneralTabs = Ext.create('Ext.tab.Panel', {
         {
             title: 'Compose Map',
             items:[
-                SingleSearchForm, layer_legend_tree, downloads
+                SingleSearchForm, layer_legend_tree, downloads, vci_downloads
             ]
         }/*,
         {

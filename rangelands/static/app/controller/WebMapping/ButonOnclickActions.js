@@ -39,6 +39,7 @@ var stats_region = '';
 
 Ext.rangelands.years = [
 
+    ['2021'],
     ['2020'],
     ['2019'],
     ['2018'],
@@ -117,7 +118,7 @@ Ext.rangelands.dekads4 = [
 function loadConfig(){
 
 	var _url = '/appconfig/'
-
+	/*
 	$.ajax({
     	type: "GET",
     	url: _url,
@@ -125,46 +126,47 @@ function loadConfig(){
     	dataType: "json",
 		crossDomain: true,
     	success: function(data){
+	*/
 
-
-    		for(var i=0; i < data.counties.length; i++){
-    			Ext.rangelands.counties.push([data.counties[i].name, data.counties[i].longitude, data.counties[i].latitude]);
+    		for(var i=0; i < rdst_data.counties.length; i++){
+    			Ext.rangelands.counties.push([rdst_data.counties[i].name, rdst_data.counties[i].longitude, rdst_data.counties[i].latitude]);
     		}
 
-    		for(var i=0; i < data.kenya_wards.length; i++){
-    			Ext.rangelands.wards.push([data.kenya_wards[i].name, data.kenya_wards[i].county, data.kenya_wards[i].longitude, data.kenya_wards[i].latitude]);
+    		for(var i=0; i < rdst_data.kenya_wards.length; i++){
+    			Ext.rangelands.wards.push([rdst_data.kenya_wards[i].name, rdst_data.kenya_wards[i].county, rdst_data.kenya_wards[i].longitude, rdst_data.kenya_wards[i].latitude]);
     		}
     		
-    		for(var i=0; i < data.lwf_areas.length; i++){
-    			Ext.rangelands.lwf_areas.push([data.lwf_areas[i].name, data.lwf_areas[i].longitude, data.lwf_areas[i].latitude]);
+    		for(var i=0; i < rdst_data.lwf_areas.length; i++){
+    			Ext.rangelands.lwf_areas.push([rdst_data.lwf_areas[i].name, rdst_data.lwf_areas[i].longitude, rdst_data.lwf_areas[i].latitude]);
     		}
 
-    		for(var i=0; i < data.nrt_conservancies.length; i++){
-    			Ext.rangelands.conservancies.push([data.nrt_conservancies[i].name, data.nrt_conservancies[i].longitude, data.nrt_conservancies[i].latitude]);
-    		}
-
-
-    		for(var i=0; i < data.nrt_rehab_areas.length; i++){
-    			Ext.rangelands.nrt_rehab_areas.push([data.nrt_rehab_areas[i].name, data.nrt_rehab_areas[i].longitude, data.nrt_rehab_areas[i].latitude]);
+    		for(var i=0; i < rdst_data.nrt_conservancies.length; i++){
+    			Ext.rangelands.conservancies.push([rdst_data.nrt_conservancies[i].name, rdst_data.nrt_conservancies[i].longitude, rdst_data.nrt_conservancies[i].latitude]);
     		}
 
 
-    		for(var i=0; i < data.nrt_grazing_blocks.length; i++){
-    			Ext.rangelands.nrt_grazing_blocks.push([data.nrt_grazing_blocks[i].name, data.nrt_grazing_blocks[i].longitude, data.nrt_grazing_blocks[i].latitude]);
+    		for(var i=0; i < rdst_data.nrt_rehab_areas.length; i++){
+    			Ext.rangelands.nrt_rehab_areas.push([rdst_data.nrt_rehab_areas[i].name, rdst_data.nrt_rehab_areas[i].longitude, rdst_data.nrt_rehab_areas[i].latitude]);
     		}
 
-    		for(var i=0; i < data.lewa_blocks.length; i++){
-    			Ext.rangelands.lewa_blocks.push([data.lewa_blocks[i].name, data.lewa_blocks[i].longitude, data.lewa_blocks[i].latitude]);
+
+    		for(var i=0; i < rdst_data.nrt_grazing_blocks.length; i++){
+    			Ext.rangelands.nrt_grazing_blocks.push([rdst_data.nrt_grazing_blocks[i].name, rdst_data.nrt_grazing_blocks[i].longitude, rdst_data.nrt_grazing_blocks[i].latitude]);
     		}
 
-            for(var i=0; i < data.county_blocks.length; i++){
-                Ext.rangelands.county_blocks.push([data.county_blocks[i].name, data.county_blocks[i].longitude, data.county_blocks[i].latitude]);
+    		for(var i=0; i < rdst_data.lewa_blocks.length; i++){
+    			Ext.rangelands.lewa_blocks.push([rdst_data.lewa_blocks[i].name, rdst_data.lewa_blocks[i].longitude, rdst_data.lewa_blocks[i].latitude]);
+    		}
+
+            for(var i=0; i < rdst_data.county_blocks.length; i++){
+                Ext.rangelands.county_blocks.push([rdst_data.county_blocks[i].name, rdst_data.county_blocks[i].longitude, rdst_data.county_blocks[i].latitude]);
              }
 
         	
-
+	/*
     	}
 	});
+	*/
 
 
 
@@ -601,6 +603,50 @@ function highLight(_layer, _name){
 
 }
 
+// load vci ftp links
+function loadFTPlinks(_name){
+
+	var vcigrid = Ext.getCmp('vci_downgrid').getStore();
+	vcigrid.removeAll();  
+
+	var ftp_data = [];
+
+	for(var i=0; i < vci_product_links.ftp_links.length; i++){
+
+		var county_ftp = vci_product_links.ftp_links[i].name;
+		if(county_ftp == _name){
+
+			var reports = vci_product_links.ftp_links[i].reports;
+
+			for(var j=0; j < vci_product_links.ftp_links[i].reports.length; j++){
+				var ftp_label = vci_product_links.ftp_links[i].reports[j][0];
+				var ftp_link = vci_product_links.ftp_links[i].reports[j][1];
+				var ftp_url = "<a href='" + ftp_link + "'>" + ftp_label + "</a>";
+
+				ftp_data.push({label1: ftp_url});
+			}
+
+			var forecasts = vci_product_links.ftp_links[i].forecasts;
+
+			for(var k=0; k < vci_product_links.ftp_links[i].forecasts.length; k++){
+				var ftp_label = vci_product_links.ftp_links[i].forecasts[k][0];
+				var ftp_link = vci_product_links.ftp_links[i].forecasts[k][1];
+				var ftp_url = "<a href='" + ftp_link + "'>" + ftp_label + "</a>";
+
+				ftp_data.push({label1: ftp_url});
+			}
+
+
+		}
+
+	}
+
+	vcigrid.loadData(ftp_data, true)
+
+
+}
+
+
 // add grazing blocks to conservancy
 function addGrazingWms(_name){
 
@@ -982,7 +1028,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 
 								highLight(boundarytype, _boundary);
-
+								loadFTPlinks(_boundary);
 
 
 								var _ward = Ext.getCmp('ward');
@@ -1020,6 +1066,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 						stats_boundary = 'county';
 						stats_region = _boundary;
 						Ext.getCmp('graph_button').enable();
+						//Ext.getCmp('vci_button').enable();
 
 					} else if(boundarytype == 'NRT Grazing Blocks'){
 
@@ -1720,6 +1767,14 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 					var win = window.open('http://apps.rcmrd.org/rangelands/', '_blank');
 				}
 			},
+			'MapPanel button[action=vci_app]':
+                        {
+                                click: function ()
+                                {
+
+                                        var win = window.open('https://apps.rcmrd.org:8443/VCI_Forecasts/', '_blank');
+                                }
+                        },
 			'MapPanel button[action=map_default_map_extent]':
 			{
 				click: function() 

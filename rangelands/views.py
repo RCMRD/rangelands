@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
 
-from rangelands.gee_utils import getPondMap
+#from rangelands.gee_utils import getPondMap
 from rangelands.data.models import *
 from rangelands.data.timeseries import *
 from rangelands.data.centroids import *
@@ -17,6 +17,7 @@ def home(request):
 	"""
 		Return latest modis dekadal wms layer
 	"""
+	"""
 	geoserver_api = settings.GEOSERVER_URL + '/rest'
 	cat = Catalog(geoserver_api, settings.GEOSERVER_USER, settings.GEOSERVER_PASS)
 
@@ -29,12 +30,13 @@ def home(request):
 			dekadal.append(layer_name)
 
 	today = datetime.datetime.now().strftime('%Y-%m-%d')
-	result = getPondMap(today)
-
+	#result = getPondMap(today)
+	"""
 	context_dict = {
-		'latest_dekadal': max(dekadal),
-		'pond_mapid':result['mapid'],
-		'pond_token': result['token']
+		#'latest_dekadal': max(dekadal)
+		'latest_dekadal': 'modis.dekadal.20201001.tif'
+		#'pond_mapid':result['mapid'],
+		#'pond_token': result['token']
 	}
 
 	return render_to_response('index.html', RequestContext(request, context_dict))
@@ -171,9 +173,10 @@ def statistics(request, boundary, region, year):
 
 	return HttpResponse(json.dumps(stats_data), content_type="application/json")
 
-
+"""
 def get_pond_map(request):
 	today = datetime.datetime.now().strftime('%Y-%m-%d')
 	result = getPondMap(today)
 
 	return HttpResponse(json.dumps(result), content_type="application/json")
+"""

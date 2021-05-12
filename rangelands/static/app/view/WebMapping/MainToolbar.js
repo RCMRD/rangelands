@@ -110,6 +110,15 @@ Ext.define('LandCover.view.WebMapping.MainToolbar',
 							action: 'mapgen_app'
 						},
 					    '-',
+                                            {
+                                                        text: 'VCI Forecasts',
+                                                        cls:'tools_cls',
+                                                        tooltip: "VCI Forecasts",
+                                                        //icon: '/static/assets/images/about.png',
+                                                        enableToggle: true,
+                                                        action: 'vci_app'
+                                                },
+                                            '-',
 					    {
 							text: 'Feedback',
 							cls:'tools_cls',
