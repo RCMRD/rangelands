@@ -1065,7 +1065,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 						stats_boundary = 'county';
 						stats_region = _boundary;
-						Ext.getCmp('graph_button').enable();
+						//Ext.getCmp('graph_button').enable();
 						//Ext.getCmp('vci_button').enable();
 
 					} else if(boundarytype == 'NRT Grazing Blocks'){
@@ -1185,7 +1185,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 						stats_boundary = 'conservancy';
 						stats_region = _boundary;
-						Ext.getCmp('graph_button').enable();
+						//Ext.getCmp('graph_button').enable();
 
 
 
@@ -1265,7 +1265,7 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 					stats_boundary = 'ward';
 					stats_region = _selected_ward;
-					Ext.getCmp('graph_button').enable();
+					//Ext.getCmp('graph_button').enable();
 
 					for(var i=0; i < Ext.rangelands.wards.length; i++){
 						if(Ext.rangelands.wards[i][0] == _selected_ward){
@@ -1628,14 +1628,30 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 					//get selected year and month
 					var sel_year = Ext.getCmp('vci_year3').getValue();
 					var sel_month = Ext.getCmp('vci_month3').getValue();
-					var suf_month = sel_month - 2;
+					var suf_year = sel_year;
+
+
+					if(sel_month == 1){
+					    var suf_month = 11;
+					    suf_year = suf_year - 1;
+					} else if(sel_month == 2){
+					    var suf_month = 12;
+					    suf_year = suf_year - 1;
+					} else {
+					    var suf_month = sel_month - 2;
+					}
+
+
 					if(sel_month < 10){
 						sel_month = '0' + sel_month;
 					}
+
 					if(suf_month < 10){
 						suf_month = '0' + suf_month;
 					}
-					var monthly_layer = 'modis.moving.average.VCI.' + sel_year + sel_month + '.' + sel_year + suf_month + '.tif';
+
+					var monthly_layer = 'modis.moving.average.VCI.' + sel_year + sel_month + '.' + suf_year + suf_month + '.tif';
+					//console.log(monthly_layer);
 					loadLayer(monthly_layer);
 					ndvi_tif = monthly_layer;
 					Ext.getCmp('boundarytype').enable();

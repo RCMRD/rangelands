@@ -525,7 +525,7 @@ VCIForm = Ext.create('Ext.form.Panel', {
                     emptyText: 'Select season...'
                 }]
             },{
-                title: 'VCI Moving Average',
+                title: '3-Month Moving Average',
                 id: 'vci_moving',
                 defaultType: 'textfield',
                 defaults: {
