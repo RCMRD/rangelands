@@ -18,16 +18,20 @@ def home(request):
 		Return latest modis dekadal wms layer
 	"""
 
-	geoserver_api = settings.GEOSERVER_URL + '/rest'
-	cat = Catalog(geoserver_api, settings.GEOSERVER_USER, settings.GEOSERVER_PASS)
+	#geoserver_api = settings.GEOSERVER_URL + '/rest'
+	#cat = Catalog(geoserver_api, settings.GEOSERVER_USER, settings.GEOSERVER_PASS)
+	#all_layers = cat.get_layers()
+	module_dir = os.path.dirname(__file__)
+	file_path = os.path.join(module_dir, 'layers.txt')
 
-	all_layers = cat.get_layers()
 	dekadal = []
-	for layer in all_layers:
-		layer_name = layer.name
-		if fnmatch.fnmatch(layer_name, '*modis.dekadal.2021*'):
-			layer_name = layer_name.replace("rangelands:","")
-			dekadal.append(layer_name)
+	with open(file_path, "r") as data_file:
+		geo_layers = data_file.readlines()
+		for _layer in geo_layers:
+			_layer = _layer.replace("\n", "")
+			if fnmatch.fnmatch(_layer, '*modis.dekadal.2021*'):
+				dekadal.append(_layer)
+
 
 	today = datetime.datetime.now().strftime('%Y-%m-%d')
 	#result = getPondMap(today)
